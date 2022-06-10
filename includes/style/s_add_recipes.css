@@ -1,0 +1,57 @@
+body{
+    margin:0px;
+     font-family: arial;
+}
+
+.container-fluid{
+    background-color: rgb(230, 240, 240);
+}
+
+.card{
+    padding:3%;
+    border-radius:40px; 
+    background-color:rgb(164, 196, 185);
+}
+
+.success{
+    color: rgb(34, 145, 24);
+    text-decoration: underline;
+}
+
+label.col-form-label{
+    text-decoration:underline;
+}
+
+label.form-label{
+    text-decoration:underline;
+}
+
+label.form-check-label{
+    font-size:15px;
+    font-style: italic;
+}
+
+.error{
+    color: rgb(165, 34, 34); 
+    font-weight:bold;
+    padding-top:10px;
+}
+
+p{
+    text-decoration:underline;
+}
+
+button.btn.w-100{
+    background-color: rgb(94, 130, 139);
+    color:white;
+}
+
+button:hover {
+    cursor:pointer;
+    box-shadow: 0 10px 10px 0 rgba(0,0,0,0.15), 0 5px 50px 0 rgba(0,0,0,0.15);
+
+}
+
+input{
+    border-radius:8px;
+}

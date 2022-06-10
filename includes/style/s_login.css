@@ -1,0 +1,51 @@
+html{
+    background-color:rgba(253, 196, 162, 0.3);
+}
+
+footer{
+    position:fixed;
+}
+
+button:hover {
+    cursor:pointer;
+    box-shadow: 0 10px 10px 0 rgba(0,0,0,0.15), 0 5px 50px 0 rgba(0,0,0,0.15);
+
+}
+body{
+    margin:0px;
+    font-family: arial;
+}
+
+.container-fluid{
+    background-color:rgba(253, 196, 162, 0.3);
+    background-size: cover;
+    height:100%;
+}
+
+h2.pt-5{
+    text-align:center;
+}
+
+.row{
+    background-color: rgba(236, 177, 142, 0.884);
+}
+
+.alert{
+    color: rgb(165, 34, 34);
+}
+
+form{
+    width: -webkit-fill-available;
+}
+
+button.btn.w-100{
+    padding: 5%;
+    margin: 1% 15%;
+    margin: auto;
+    background-color: rgb(94, 130, 139);
+    color:white;
+}
+
+h3{
+    text-align:center;
+}

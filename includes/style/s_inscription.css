@@ -1,0 +1,54 @@
+html{
+    
+}
+
+body{
+    margin:0px; 
+    font-family: arial;
+    background-color:rgba(212, 178, 158, 0.3);
+}
+
+.container-fluid{
+    background-color:rgba(253, 196, 162, 0.3); 
+    background-size: cover;
+    height:100%;
+}
+
+h2.pt-5{
+    text-align:center;
+}
+
+.row.py-5{
+    background-color: rgba(236, 177, 142, 0.884);
+}
+
+.alert{
+    font-size:larger;
+    text-align:center;
+    color: rgb(165, 34, 34);
+    font-weight:bold;
+}
+
+.error{
+    color: rgb(165, 34, 34);
+    font-weight:bold;
+}
+
+button.btn.w-100{
+    background-color: rgb(94, 130, 139);
+    color:white;
+}
+
+button:hover {
+    cursor:pointer;
+    box-shadow: 0 10px 10px 0 rgba(0,0,0,0.15), 0 5px 50px 0 rgba(0,0,0,0.15);
+
+}
+
+.already_connect{
+    padding: 5%;margin: 1% 10%;text-align:center;
+}
+
+form{
+    width: -webkit-fill-available;
+}

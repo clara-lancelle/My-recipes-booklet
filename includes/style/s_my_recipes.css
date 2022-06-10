@@ -1,0 +1,53 @@
+html{
+    background-color:rgb(233, 233, 233);
+    
+}
+
+body{
+    margin:0px; 
+    font-family: arial;
+}
+
+.container-fluid{
+    background-color:rgb(233, 233, 233);
+}
+
+.row{
+    background-color:  rgb(151, 180, 170);
+}
+
+h4.error{
+    padding:5%;
+    text-align:center;
+    color: white;
+}
+
+.card{
+    max-width:25rem;
+    color:white;
+    border-radius:20px;
+}
+
+.card-header{
+    height:182px;
+}
+
+img.card-img-top{
+    max-height:160px;
+}
+
+button:hover {
+    cursor:pointer;
+    box-shadow: 0 10px 10px 0 rgba(0,0,0,0.15), 0 5px 50px 0 rgba(0,0,0,0.15);
+
+}
+
+li.page-item.active a.page-link{
+    background-color: rgb(193, 218, 196)!important;
+    border-color: darkgrey!important;
+    color:grey!important;
+}
+
+a.page-link{
+    color:grey!important;
+}

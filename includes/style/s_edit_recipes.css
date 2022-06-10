@@ -1,0 +1,33 @@
+body{
+    margin:0px; 
+    font-family: arial;
+}
+
+
+
+h3.success{
+    text-align:center;
+    padding:5%;
+    color: rgb(34, 145, 24);
+}
+
+h3.error{
+    text-align:center;
+    color: rgb(165, 34, 34);
+}
+
+.card{
+    background-color: rgba(236, 177, 142, 0.884);
+    border-radius:10px;
+}
+
+button.btn{
+    background-color: rgb(63, 66, 62);
+    color:white;
+}
+
+button:hover {
+    cursor:pointer;
+    box-shadow: 0 10px 10px 0 rgba(0,0,0,0.15), 0 5px 50px 0 rgba(0,0,0,0.15);
+
+}

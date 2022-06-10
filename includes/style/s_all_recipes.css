@@ -1,0 +1,42 @@
+html{
+    background-color:rgba(253, 196, 162, 0.3);
+}
+
+body{
+    margin:0px; 
+    font-family: arial;
+}
+
+.row{
+    background-color: rgba(250, 147, 62, 0.4);
+}
+
+.card{
+    max-width:25rem;color:white;border-radius:20px;
+}
+
+.card-img-top{
+    max-height:160px;
+}
+
+.card-header{
+    height:182px;
+}
+
+button.edit{
+    background-color: rgb(197, 156, 94); 
+    color:white;
+    border-radius:10px;
+    border : solid rgb(182, 135, 65);
+}
+
+
+li.page-item.active a.page-link{
+    background-color: bisque!important;
+    border-color: darkgrey!important;
+    color:grey!important;
+}
+
+a.page-link{
+    color:grey!important;
+}

@@ -1,0 +1,19 @@
+.navbar-brand{
+    font-size:1.4rem;
+     font-style:italic;
+}
+
+.navbar-nav{
+    font-size:1.3rem;
+}
+
+.nav-item:hover {
+    cursor:pointer;
+    box-shadow: 0 10px 10px 0 rgba(0,0,0,0.15), 0 5px 50px 0 rgba(0,0,0,0.15);
+
+}
+
+footer {
+    bottom: 0 !important;
+    
+}
