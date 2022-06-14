@@ -50,7 +50,7 @@ if(isset($_GET['page']) && !empty($_GET['page'])){
         <?php include "includes/navbar.php" ?>
     </header>
 
-    <div class="container col-lg-10 justify-content-center">
+    <div class="container col-12 col-lg-10 justify-content-center">
         <div class="col col-12 justify-self-center m-auto pb-5">
             <h2 class="text-center py-lg-5 py-3 m-0 text-secondary">Toutes les recettes</h2>
             <div class="row col-12 m-auto">
