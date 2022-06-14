@@ -13,7 +13,7 @@ You can see all recipes registered by others, you can also create your own recip
 
 You will see your recipes on your personnal page where you can also modify them.
 
-![This is the all recipes page](https://github.com/clara-lancelle/TD_Recipes/blob/main/README_img/sreen.png)
+![This is the all recipes page](https://github.com/clara-lancelle/TD_Recipes/blob/main/README_img/screen.png)
 
 
 ## How to download repository
