@@ -16,10 +16,10 @@ body{
     background-color:  rgb(151, 180, 170);
 }
 
-h4.error{
-    padding:5%;
-    text-align:center;
+.error{
+    padding:8%;
     color: white;
+    
 }
 
 .card{

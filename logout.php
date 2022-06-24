@@ -9,7 +9,7 @@ session_start();
   <meta charset="utf-8" />
   
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  
+  <link rel="icon" href="http://localhost/TD_RECIPES/includes/img/favicon.png" type="image/png">
   <link
   rel="stylesheet"
   href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -45,7 +45,7 @@ session_start();
             }else{
                 session_destroy();
                 echo 'vous avez été déconnecté(e) avec succès !';
-                header("location: login.php");
+                header("location: index.php");
                 die(); 
             } 
         ?>

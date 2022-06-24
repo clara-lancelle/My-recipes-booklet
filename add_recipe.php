@@ -2,7 +2,7 @@
 session_start();
 
 if(!isset($_SESSION['id']) || empty($_SESSION['id'])){
-    header("location: login.php");
+    header("location: index.php");
     exit();
 }
 
@@ -24,6 +24,7 @@ if(isset($return_form['success'])&& $return_form['success']=== true){
 
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width">
+  <link rel="icon" href="http://localhost/TD_RECIPES/includes/img/favicon.png" type="image/png">
 
   <link
   rel="stylesheet"

@@ -2,7 +2,7 @@
 session_start();
 
 if(!isset($_SESSION['id']) || empty($_SESSION['id'])){
-    header("location: login.php");
+    header("location: index.php");
     exit();
 }
 
@@ -17,9 +17,12 @@ include "includes/function_my_recipes.php";
     $user_id = $_SESSION['id'];
     $return = getRecipes($user_id, $current_page_nb); 
 
-    $pages = $return['pages_nb'];
-    $first_recipe = $return['first'];
-    $recipes = $return['recipes'];
+    if(!isset($return['error'])){
+        $pages = $return['pages_nb'];
+        $first_recipe = $return['first'];
+        $recipes = $return['recipes'];
+    }
+    
 ?>
 <!DOCTYPE html>
 <html lang="en"> 
@@ -27,6 +30,7 @@ include "includes/function_my_recipes.php";
   <!-- Required meta tags -->
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">   
+  <link rel="icon" href="http://localhost/TD_RECIPES/includes/img/favicon.png" type="image/png">
   
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
   <link
@@ -58,7 +62,10 @@ include "includes/function_my_recipes.php";
                 if(isset($return['error'])){  
                     foreach($return['error'] as $errors => $error){ 
 
-                    echo '<h4 class="error">'.$error.'</h4>';
+                    echo 
+                    '<div class="error">
+                        <h4>'.$error.'</h4>
+                    </div>';
                     }
                 }else{
                     echo'<div class="card-group pt-2 pt-md-5 p-3 justify-content-center m-auto">';
@@ -154,6 +161,7 @@ include "includes/function_my_recipes.php";
             <?php } ?>
         </div>      
     </div>
+    <?php if(!isset($return['error'])){ ?>
     <ul class="pagination justify-content-center pt-5">
             <!-- Lien vers la page précédente (désactivé si on se trouve sur la 1ère page) -->
             <li class="page-item <?= ($current_page_nb == 1) ? "disabled" : "" ?>">
@@ -174,6 +182,7 @@ include "includes/function_my_recipes.php";
             </a>
             </li>
         </ul>
+        <?php } ?>
     </div>
 </div>
 

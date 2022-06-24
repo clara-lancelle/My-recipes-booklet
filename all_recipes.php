@@ -2,7 +2,7 @@
 session_start();
 
 if(!isset($_SESSION['id']) || empty($_SESSION['id'])){
-   header("location: login.php");
+   header("location: index.php");
    exit();
 }
 
@@ -29,6 +29,7 @@ if(isset($_GET['page']) && !empty($_GET['page'])){
   <!-- Required meta tags -->
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="http://localhost/TD_RECIPES/includes/img/favicon.png" type="image/png">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
   
   <link

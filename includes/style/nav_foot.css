@@ -1,6 +1,13 @@
 .navbar-brand{
-    font-size:1.4rem;
-     font-style:italic;
+    font-size:1.3rem;
+    font-style:italic;
+    margin: 0px 50px;
+}
+
+.navbar-brand img{
+    border-radius: 10px;
+    
+    width: 60px;
 }
 
 .navbar-nav{
