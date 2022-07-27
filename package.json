@@ -1,0 +1,23 @@
+{
+  "dependencies": {
+    "bootstrap-icons": "^1.9.1",
+    "sass": "^1.53.0"
+  },
+  "name": "td_recipes",
+  "description": "## this website is a recipe book online made with the instructions of a BTS test.",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "sass": "sass --watch ./sass/main.scss:style.css --style expanded"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/clara-lancelle/TD_Recipes.git"
+  },
+  "author": "lancelle clara",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/clara-lancelle/TD_Recipes/issues"
+  },
+  "homepage": "https://github.com/clara-lancelle/TD_Recipes#readme"
+}

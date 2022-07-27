@@ -1,0 +1,44 @@
+
+//// btn
+
+.btn{
+    border-radius: 10px;
+    text-decoration: none;
+    width: 150px;
+    padding: 1%;
+    text-align: center;
+    font-size: 16px;
+
+    &--collapse{
+        width: 50px;
+        display: none;
+
+        @include x_smallScreen{
+            display: block;
+
+         }
+
+         
+    }
+
+    &--center{
+        text-align-last: center;
+    }
+
+    &--log{
+        
+        @include x_smallScreen{
+            width: 100px;
+        }
+    }
+
+    &:hover{
+        box-shadow: 5px 8px 5px rgba(37, 40, 56, 0.31);
+        transform: scale(1.01);
+    }
+
+
+}
+
+
+

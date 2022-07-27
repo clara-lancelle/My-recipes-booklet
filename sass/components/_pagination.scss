@@ -1,0 +1,28 @@
+.bi-caret-left-square{
+    color: $light_blue;
+}
+
+.bi-caret-right-square{
+    color: $light_blue;
+}
+
+.page-link--middle{
+    color: $light_blue;
+}
+
+.page-item.disabled{
+
+    a{
+        color: $light_blue_disabled;
+    }
+    
+    svg{
+        color: $light_blue_disabled;
+    }
+}
+
+.page-item.active{
+    a{
+        font-weight: bold;
+    }
+}

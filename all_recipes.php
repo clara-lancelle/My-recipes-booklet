@@ -30,17 +30,7 @@ if(isset($_GET['page']) && !empty($_GET['page'])){
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="http://localhost/TD_RECIPES/includes/img/favicon.png" type="image/png">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
-  
-  <link
-  rel="stylesheet"
-  href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-  integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
-  crossorigin="anonymous"
-  >
-  <link rel="stylesheet" href="http://localhost/TD_RECIPES/includes/style/nav_foot.css">
-  <link rel="stylesheet" href="http://localhost/TD_RECIPES/includes/style/s_all_recipes.css">
-  
+  <Link href="http://localhost/TD_RECIPES/style.css" rel="stylesheet" type="text/css" />
   <title>Mes recettes - Toutes les recettes</title>
 
 </head>
@@ -51,38 +41,38 @@ if(isset($_GET['page']) && !empty($_GET['page'])){
         <?php include "includes/navbar.php" ?>
     </header>
 
-    <div class="container col-12 col-lg-10 justify-content-center">
-        <div class="col col-12 justify-self-center m-auto pb-5">
-            <h2 class="text-center py-lg-5 py-3 m-0 text-secondary">Toutes les recettes</h2>
-            <div class="row col-12 m-auto">
-                <div class="card-group pt-5 p-3 justify-content-center m-auto">
-            <?php
+    <main>
+        <section class="bloc">
+            <h2 class="bloc__title">Toutes les recettes</h2>
+            <div class="bloc__body--card">
+                <?php
                 $i = 0;
                 foreach($recipes as $recipe => $array){?>
 
-                <div class="col col-12 col-md-6 col-xl-4 justify-self-center justify-content-center p-3 p-md-4 m-auto">
-                    <div class="card bg-secondary m-auto">
-                        <div class="card-header m-auto d-flex align-items-center">
-                        <?php
-                            echo '<img src="http://localhost/TD_RECIPES/Pictures/'.$array['name'].'" class="card-img-top" alt="image">';                  
-                        ?>
+                    <div class="card">
+                        <div class="card__header">
+                            <?php
+                                echo '<img src="http://localhost/TD_RECIPES/Pictures/'.$array['name'].'"  alt="image">';                  
+                            ?>
                         </div>
-                        <div class="card-body p-2">
+                        <div class="card__body">
                         <?php
-                            echo '<h4 class="card-title text-center">'.ucfirst($array['recipe_title']).'</h4>';
+                            echo '<h4 class="card__body__title">'.ucfirst($array['recipe_title']).'</h4>';
                             ?>
 
-                            <button class="btn d-lg-none" type="button" data-toggle="collapse" data-target="<?php echo '#drop-collapse'.$i;?>">
-                                <span class="navbar-light"><span class="navbar-toggler-icon"></span></span>
+                            <button class="btn btn--collapse" id="collapse_btn"  type="button" data-toggle="collapse" data-target="<?php echo '#drop-collapse'.$i;?>">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16">
+                                    <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/>
+                                </svg>
                             </button>
     
-                            <div id="<?php echo 'drop-collapse'.$i;?>" class="collapse d-lg-block">
+                            <div id="<?php echo 'drop-collapse'.$i;?>" class="bloc__collapse">
                                 <?php    
                                     echo 
-                                    '<ul class="list-group list-group-flush bg-secondary">
-                                        <li class="list-group-item bg-secondary"><i class="bi bi-people-fill"></i> Pour '.$array['guest_number'].' personnes </li>
-                                        <li class="list-group-item bg-secondary"> <i class="bi bi-hourglass-bottom"></i> Temps de préparation : '.$array['setup_time'].'</li>
-                                        <li class="list-group-item bg-secondary">';
+                                    '<ul class="list-group">
+                                        <li class="list-group-item"><i class="bi bi-people-fill"></i> Pour '.$array['guest_number'].' personnes </li>
+                                        <li class="list-group-item"> <i class="bi bi-hourglass-bottom"></i> Temps de préparation : '.$array['setup_time'].'</li>
+                                        <li class="list-group-item">';
                                         if($array['level']=='faible'){
                                             echo 
                                                 '<i class="bi bi-circle-fill"></i>
@@ -106,7 +96,7 @@ if(isset($_GET['page']) && !empty($_GET['page'])){
                                         }
                                         echo
                                         '</li>
-                                        <li class="list-group-item bg-secondary">';
+                                        <li class="list-group-item">';
                                         if($array['price']=='faible'){
                                             echo 
                                                 '<i class="bi bi-circle-fill"></i>
@@ -135,49 +125,55 @@ if(isset($_GET['page']) && !empty($_GET['page'])){
                                 <?php
 
                                 if($user_id == $array['author_id']){?>
-                                <div class="card-body pt-4 p-m-auto text-center"> 
+                                <div class="card__button"> 
                                     <form action="http://localhost/TD_RECIPES/edit_recipes.php" method="get" enctype="multipart/form-data" >
-                                        <button class="edit p-1 px-3" type="submit" name="edit_btn" <?php echo 'value="'.$array['recipe_id'].'"'; ?>>Editer</button>
+                                        <button class="btn btn--edit " type="submit" name="edit_btn" <?php echo 'value="'.$array['recipe_id'].'"'; ?>>Editer</button>
                                     </form>
-                                    </div>
-                            <?php }
-                            $i++; 
-                            ?>
+                                </div>
+                                <?php }
+                                $i++; 
+                                ?>
+                            </div>
                         </div>
                     </div>
-                </div>
+                <?php } ?>
             </div>
-        <?php } ?>
-        </div>
-    </div>
 
-        <ul class="pagination justify-content-center pt-5">
-            <!-- Lien vers la page précédente (désactivé si on se trouve sur la 1ère page) -->
-            <li class="page-item <?= ($current_page_nb == 1) ? "disabled" : "" ?>">
-                <a class="page-link text-secondary" href="all_recipes.php/?page=<?= $current_page_nb - 1 ?>" aria-label="Previous" >
-                <span aria-hidden="true">&laquo;</span>
-            </a>
-            </li>
-            <?php for($page = 1; $page <= $pages; $page++): ?>
-                <!-- Lien vers chacune des pages (activé si on se trouve sur la page correspondante) -->
-            <li class="page-item <?= ($current_page_nb == $page) ? "active" : "" ?>">
-                <a href="all_recipes.php/?page=<?= $page ?>" class="page-link"><?= $page ?></a>
-            </li>
-            <?php endfor ?>
-                <!-- Lien vers la page suivante (désactivé si on se trouve sur la dernière page) -->
-            <li class="page-item <?= ($current_page_nb == $pages) ? "disabled" : "" ?>">
-            <a class="page-link text-secondary" href="all_recipes.php//?page=<?= $current_page_nb + 1 ?>" aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
-            </a>
-            </li>
-        </ul>
+            <ul class="pagination">
+                <!-- Lien vers la page précédente (désactivé si on se trouve sur la 1ère page) -->
+                <li class="page-item <?= ($current_page_nb <= 1) ? "disabled" : "" ?>">
+                    <a class="page-link" href="?page=<?= $current_page_nb - 1 ?>" aria-label="Previous" >
+                        <span aria-hidden="true">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-left-square" viewBox="0 0 16 16">
+                                <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                                <path d="M10.205 12.456A.5.5 0 0 0 10.5 12V4a.5.5 0 0 0-.832-.374l-4.5 4a.5.5 0 0 0 0 .748l4.5 4a.5.5 0 0 0 .537.082z"/>
+                            </svg>
+                        </span>
+                    </a>
+                </li>
+                <?php for($page = 1; $page <= $pages; $page++): ?>
+                    <!-- Lien vers chacune des pages (activé si on se trouve sur la page correspondante) -->
+                <li class="page-item <?= ($current_page_nb === $page) ? "disabled" : "" ?>">
+                    <a href="?page=<?= $page ?>" class="page-link--middle"><?= $page ?></a>
+                </li>
+                <?php endfor ?>
+                    <!-- Lien vers la page suivante (désactivé si on se trouve sur la dernière page) -->
+                <li class="page-item <?= ($current_page_nb == $pages) ? "disabled" : "" ?>">
+                    <a class="page-link" href="?page=<?= $current_page_nb + 1 ?>" aria-label="Next">
+                        <span aria-hidden="true">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-caret-right-square" viewBox="0 0 16 16">
+                                <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                                <path d="M5.795 12.456A.5.5 0 0 1 5.5 12V4a.5.5 0 0 1 .832-.374l4.5 4a.5.5 0 0 1 0 .748l-4.5 4a.5.5 0 0 1-.537.082z"/>
+                            </svg>
+                        </span>
+                    </a>
+                </li>
+            </ul>
 
-    </div>
-</div>
+        </section>
+    </main>
 <?php include "includes/footer.php" ?>
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="http://localhost/TD_RECIPES/js/index.js"></script>
 </body>
  </html>

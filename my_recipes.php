@@ -31,16 +31,7 @@ include "includes/function_my_recipes.php";
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">   
   <link rel="icon" href="http://localhost/TD_RECIPES/includes/img/favicon.png" type="image/png">
-  
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
-  <link
-  rel="stylesheet"
-  href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-  integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
-  crossorigin="anonymous"
-  >
-  <link rel="stylesheet" href="http://localhost/TD_RECIPES/includes/style/nav_foot.css">
-  <link rel="stylesheet" href="http://localhost/TD_RECIPES/includes/style/s_my_recipes.css">
+  <Link href="http://localhost/TD_RECIPES/style.css" rel="stylesheet" type="text/css" />
   
   <title>Mes recettes - Mes recettes</title>
  
@@ -52,144 +43,148 @@ include "includes/function_my_recipes.php";
         <?php include "includes/navbar.php" ?>
     </header>
 
-    <div class="container-fluid justify-content-center col-12 pb-4">
+    <main>
 
-        <div class="col col-12 col-lg-10 justify-self-center m-auto ">
-            <h2 class="py-3 py-md-5 text-secondary text-center">Mes recettes</h2>
-            <div class="row">
+        <section class="bloc">
+            <h2 class="bloc__title">Mes recettes</h2>
+            <div <?php echo isset($return['error']) ? 'class="bloc__body error--grid"' : 'class="bloc__body--card"' ?> > 
             
                 <?php 
                 if(isset($return['error'])){  
                     foreach($return['error'] as $errors => $error){ 
 
                     echo 
-                    '<div class="error">
+                    '<div class="return_error error--grid text-center">
                         <h4>'.$error.'</h4>
                     </div>';
                     }
                 }else{
-                    echo'<div class="card-group pt-2 pt-md-5 p-3 justify-content-center m-auto">';
                     $i = 0;
 
                     foreach($recipes as $array => $recipe){
 
                     ?>
-                <div class="col col-md-6 col-12 col-xl-4 justify-self-center justify-content-center p-3 p-md-4 m-auto " >
-                    <div class="card bg-secondary justify-content-center m-auto p-3">
-                        
-                        <div class="card-header m-auto d-flex align-items-center">
+                    <div class="card">
+                        <div class="card__header">
                             <?php 
                             echo '<img src="http://localhost/TD_RECIPES/Pictures/'.$recipe['name'].'" 
-                             class="card-img-top" alt="votre image" >';
-                        ?> 
+                                class="card__img" alt="votre image" >';
+                            ?> 
                         </div>
-                        <div class="card-body bg-secondary p-2 p-md-auto">
-                        <?php
-                            echo '<h3 class="card-title text-center">'.ucfirst($recipe['recipe_title']).'</h3>';
-                        ?>
-
-                        <button class="btn d-lg-none" type="button" data-toggle="collapse" data-target="<?php echo '#drop-collapse'.$i;?>">
-                            <span class="navbar-light"><span class="navbar-toggler-icon"></span></span>
-                        </button>
-                        
-                        <div id="<?php echo 'drop-collapse'.$i;?>" class="collapse d-lg-block ">
+                        <div class="card__body">
                             <?php
-                            echo 
-                            '<ul class="list-group list-group-flush bg-secondary ">
-                                <li class="list-group-item bg-secondary"> <i class="bi bi-people-fill"></i> Pour '.$recipe['guest_number'].' personnes</li>
-                                <li class="list-group-item bg-secondary"> <i class="bi bi-hourglass-bottom"></i> Temps de préparation : '.$recipe['setup_time'].'</li>
-                                <li class="list-group-item bg-secondary">';
-                                if($recipe['level']=='faible'){
-                                    echo 
-                                        '<i class="bi bi-circle-fill"></i>
-                                        <i class="bi bi-circle"></i>
-                                        <i class="bi bi-circle"></i>
-                                        : Très facile';
-                                }
-                                if($recipe['level']=='moyen'){
-                                    echo 
-                                        '<i class="bi bi-circle-fill"></i>
-                                        <i class="bi bi-circle-fill"></i>
-                                        <i class="bi bi-circle"></i>
-                                        : Niveau moyen';
-                                }
-                                if($recipe['level']=='élevé'){
-                                    echo 
-                                        '<i class="bi bi-circle-fill"></i>
-                                        <i class="bi bi-circle-fill"></i>
-                                        <i class="bi bi-circle-fill"></i>
-                                        : Difficile ';
-                                }
-                                echo
-                                '</li>
-                                <li class="list-group-item bg-secondary">';
-                                if($recipe['price']=='faible'){
-                                    echo 
-                                        '<i class="bi bi-circle-fill"></i>
-                                        <i class="bi bi-circle"></i>
-                                        <i class="bi bi-circle"></i>
-                                        : Bon marché';
-                                }
-                                if($recipe['price']=='moyen'){
-                                    echo 
-                                        '<i class="bi bi-circle-fill"></i>
-                                        <i class="bi bi-circle-fill"></i>
-                                        <i class="bi bi-circle"></i>
-                                        : Coût moyen';
-                                }
-                                if($recipe['price']=='élevé'){
-                                    echo 
-                                        '<i class="bi bi-circle-fill"></i>
-                                        <i class="bi bi-circle-fill"></i>
-                                        <i class="bi bi-circle-fill"></i>
-                                        : Coût élevé';
-                                }
-                                '</li>';    
+                                echo '<h4 class="card__body__title">'.ucfirst($recipe['recipe_title']).'</h4>';
                             ?>
-                            </ul>
-                            <div class="card-body text-center pt-4 p-m-auto"> 
-                                <form action="http://localhost/TD_RECIPES/edit_recipes.php" method="get" enctype="multipart/form-data">
-                                    <button type="submit" class="btn" name="edit_btn" <?php echo 'value="'.$recipe['recipe_id'].'"'; ?> style="background-color: rgb(63, 66, 62); color:white; border-radius:10px; padding: 5px;" > Modifier ma recette </button>
-                                </form>
+                            <button class="btn btn--collapse" type="button" data-toggle="collapse" data-target="<?php echo '#drop-collapse'.$i;?>">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16">
+                                    <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/>
+                                </svg>
+                            </button>
+                        
+                            <div id="<?php echo 'drop-collapse'.$i;?>" class="bloc__collapse">
+                                <?php
+                                    echo 
+                                    '<ul class="list-group">
+                                        <li class="list-group-item "> <i class="bi bi-people-fill"></i> Pour '.$recipe['guest_number'].' personnes</li>
+                                        <li class="list-group-item "> <i class="bi bi-hourglass-bottom"></i> Temps de préparation : '.$recipe['setup_time'].'</li>
+                                        <li class="list-group-item ">';
+                                        if($recipe['level']=='faible'){
+                                            echo 
+                                                '<i class="bi bi-circle-fill"></i>
+                                                <i class="bi bi-circle"></i>
+                                                <i class="bi bi-circle"></i>
+                                                : Très facile';
+                                        }
+                                        if($recipe['level']=='moyen'){
+                                            echo 
+                                                '<i class="bi bi-circle-fill"></i>
+                                                <i class="bi bi-circle-fill"></i>
+                                                <i class="bi bi-circle"></i>
+                                                : Niveau moyen';
+                                        }
+                                        if($recipe['level']=='élevé'){
+                                            echo 
+                                                '<i class="bi bi-circle-fill"></i>
+                                                <i class="bi bi-circle-fill"></i>
+                                                <i class="bi bi-circle-fill"></i>
+                                                : Difficile ';
+                                        }
+                                        echo
+                                        '</li>
+                                        <li class="list-group-item ">';
+                                        if($recipe['price']=='faible'){
+                                            echo 
+                                                '<i class="bi bi-circle-fill"></i>
+                                                <i class="bi bi-circle"></i>
+                                                <i class="bi bi-circle"></i>
+                                                : Bon marché';
+                                        }
+                                        if($recipe['price']=='moyen'){
+                                            echo 
+                                                '<i class="bi bi-circle-fill"></i>
+                                                <i class="bi bi-circle-fill"></i>
+                                                <i class="bi bi-circle"></i>
+                                                : Coût moyen';
+                                        }
+                                        if($recipe['price']=='élevé'){
+                                            echo 
+                                                '<i class="bi bi-circle-fill"></i>
+                                                <i class="bi bi-circle-fill"></i>
+                                                <i class="bi bi-circle-fill"></i>
+                                                : Coût élevé';
+                                        }
+                                        '</li>';    
+                                    ?>
+                                </ul>
+                                <div class="card__button"> 
+                                    <form action="http://localhost/TD_RECIPES/edit_recipes.php" method="get" enctype="multipart/form-data">
+                                        <button type="submit" class="btn" name="edit_btn" <?php echo 'value="'.$recipe['recipe_id'].'"'; ?> style="background-color: rgb(63, 66, 62); color:white; border-radius:10px; padding: 5px;" > Modifier ma recette </button>
+                                    </form>
+                                </div>
+                                <?php $i++;?>
                             </div>
-                            <?php $i++;?>
                         </div>
                     </div>
-                </div>
-            </div>
             <?php } ?>
-            <?php } ?>
-        </div>      
-    </div>
-    <?php if(!isset($return['error'])){ ?>
-    <ul class="pagination justify-content-center pt-5">
-            <!-- Lien vers la page précédente (désactivé si on se trouve sur la 1ère page) -->
-            <li class="page-item <?= ($current_page_nb == 1) ? "disabled" : "" ?>">
-                <a class="page-link text-secondary" href="my_recipes.php/?page=<?= $current_page_nb - 1 ?>" aria-label="Previous" >
-                <span aria-hidden="true">&laquo;</span>
-            </a>
-            </li>
-            <?php for($page = 1; $page <= $pages; $page++): ?>
-                <!-- Lien vers chacune des pages (activé si on se trouve sur la page correspondante) -->
-                <li class="page-item <?= ($current_page_nb == $page) ? "active" : "" ?>">
-                    <a href="my_recipes.php/?page=<?= $page ?>" class="page-link"><?= $page ?></a>
+        <?php } ?>   
+        </div>
+        <?php if(!isset($return['error'])){ ?>
+        <ul class="pagination">
+                <!-- Lien vers la page précédente (désactivé si on se trouve sur la 1ère page) -->
+                <li class="page-item <?= ($current_page_nb <= 1) ? "disabled" : "" ?>">
+                    <a class="page-link" href="?page=<?= $current_page_nb - 1 ?>" aria-label="Previous" >
+                        <span aria-hidden="true">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-left-square" viewBox="0 0 16 16">
+                                <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                                <path d="M10.205 12.456A.5.5 0 0 0 10.5 12V4a.5.5 0 0 0-.832-.374l-4.5 4a.5.5 0 0 0 0 .748l4.5 4a.5.5 0 0 0 .537.082z"/>
+                            </svg>
+                        </span>
+                    </a>
                 </li>
-            <?php endfor ?>
-                <!-- Lien vers la page suivante (désactivé si on se trouve sur la dernière page) -->
+                <?php for($page = 1; $page <= $pages; $page++): ?>
+                    <!-- Lien vers chacune des pages (activé si on se trouve sur la page correspondante) -->
+                <li class="page-item <?= ($current_page_nb === $page) ? "disabled" : "" ?>">
+                    <a href="?page=<?= $page ?>" class="page-link--middle"><?= $page ?></a>
+                </li>
+                <?php endfor ?>
+                    <!-- Lien vers la page suivante (désactivé si on se trouve sur la dernière page) -->
                 <li class="page-item <?= ($current_page_nb == $pages) ? "disabled" : "" ?>">
-                <a  class="page-link text-secondary" href="my_recipes.php//?page=<?= $current_page_nb + 1 ?>" aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
-            </a>
-            </li>
-        </ul>
-        <?php } ?>
-    </div>
-</div>
+                    <a class="page-link" href="?page=<?= $current_page_nb + 1 ?>" aria-label="Next">
+                        <span aria-hidden="true">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-caret-right-square" viewBox="0 0 16 16">
+                                <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                                <path d="M5.795 12.456A.5.5 0 0 1 5.5 12V4a.5.5 0 0 1 .832-.374l4.5 4a.5.5 0 0 1 0 .748l-4.5 4a.5.5 0 0 1-.537.082z"/>
+                            </svg>
+                        </span>
+                    </a>
+                </li>
+            </ul>
+        <?php } ?> 
+        </section>
+    </main>
 
 <?php include "includes/footer.php" ?>
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="http://localhost/TD_RECIPES/js/index.js"></script>
 </body>
 </html>

@@ -1,41 +1,48 @@
 
+<div class="navbar">
+        <figure class="navbar__logo">
+            <a id="home_link" href="#"><img class="logo" src="http://localhost/TD_RECIPES/includes/img/logo-w.png" alt="logo"></a>
+        </figure>
 
-<nav class="navbar navbar-expand-lg navbar-dark sticky-top px-5 bg-secondary">
-    <a class="navbar-brand" href="#">
-    <img src="http://localhost/TD_RECIPES/includes/img/logo.png" alt="logo">
-    </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+        <div class="navbar__brand">
+            <h1>Booklet</h1>
+        </div>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto mx-lg-5">
-    <?php
-        if(empty($_SESSION['id'])){ 
-    ?>
-        <li class="nav-item px-lg-5 ">
-            <a class="nav-link"  <?php echo $current_page == "log" ? ' style="text-decoration: none; color:white;" ' : 'style="text-decoration: none;"' ;?> href="http://localhost/TD_RECIPES/index.php" >Me connecter</a>
-        </li>
-        <li class="nav-item px-lg-5 ">
-            <a class="nav-link"  <?php echo $current_page == "ins" ? 'style="text-decoration: none;color:white;" ': 'style=" text-decoration: none;"' ;?> href="http://localhost/TD_RECIPES/inscription.php" >M'inscire</a>
-        </li>
-      <?php } ?>
-    <?php
-        if(!empty($_SESSION['id'])){ 
-    ?>
-        <li class="nav-item px-lg-5">
-            <a class="nav-link" <?php echo $current_page == "my" ? 'style=" text-decoration: none;color:white;" ': 'style="text-decoration: none;"' ;?> href="http://localhost/TD_RECIPES/my_recipes.php">Mes recettes</a>
-        </li>
-        <li class="nav-item px-lg-5">
-            <a class="nav-link" <?php echo $current_page == "all" ? 'style=" text-decoration: none;color:white;" ': 'style="text-decoration: none;"' ;?> href="http://localhost/TD_RECIPES/all_recipes.php/?page=1">Toutes les recettes</a> 
-        </li>
-        <li class="nav-item px-lg-5">
-            <a class="nav-link" <?php echo $current_page == "add" ? 'style=" text-decoration: none;color:white;" ': 'style="text-decoration: none;"' ;?>  href="http://localhost/TD_RECIPES/add_recipe.php">Ajouter une recette</a>    
-        </li>
-        <li class="nav-item px-lg-5">
-            <a class="nav-link"  <?php echo $current_page == "out" ? 'style=" text-decoration:none;color:white;" ': 'style="text-decoration: none;"' ;?> href="http://localhost/TD_RECIPES/logout.php" >Me déconnecter</a>
-        </li>
-      <?php }?>
-    </ul>
-  </div>
-</nav>
+        <div id="menu-button">
+            <div id="line-1"></div>
+            <div id="line-2"></div>
+            <div id="line-3"></div>
+        </div>
+
+        <nav class="navbar__items" role="navigation" id="menu">
+            <ul>
+                <?php
+                    if(empty($_SESSION['id'])){ 
+                ?>
+                    <li class="navbar__items__link">
+                        <a <?php echo $current_page == "log" ? 'class="drop_scroll active"' : 'class="drop_scroll"' ;?> href="http://localhost/TD_RECIPES/index.php" >Me connecter</a>
+                    </li>
+                    <li class="navbar__items__link">
+                        <a <?php echo $current_page == "ins" ? 'class="drop_scroll active"': 'class="drop_scroll"' ;?> href="http://localhost/TD_RECIPES/inscription.php" >M'inscire</a>
+                    </li>
+                <?php } ?>
+                <?php
+                    if(!empty($_SESSION['id'])){ 
+                ?>
+                    <li class="navbar__items__link"> 
+                        <a <?php echo $current_page == "my" ? 'class="drop_scroll active"': 'class="drop_scroll"' ;?> href="http://localhost/TD_RECIPES/my_recipes.php">Mes recettes</a>    
+                    </li>
+                    <li class="navbar__items__link"> 
+                        <a <?php echo $current_page == "all" ? 'class="drop_scroll active" ': 'class="drop_scroll"' ;?> href="http://localhost/TD_RECIPES/all_recipes.php/?page=1">Toutes les recettes</a> 
+                    </li>
+                    <li class="navbar__items__link"> 
+                        <a <?php echo $current_page == "add" ? 'class="drop_scroll active" ': 'class="drop_scroll"' ;?>  href="http://localhost/TD_RECIPES/add_recipe.php">Ajouter une recette</a> 
+                    </li>
+                    <li class="navbar__items__link"> 
+                        <a <?php echo $current_page == "out" ? 'style=" text-decoration:none;color:white;" ': 'class="drop_scroll"' ;?> href="http://localhost/TD_RECIPES/logout.php" >Me déconnecter</a>
+                    </li>
+                <?php }?>  
+            </ul>
+        </nav> 
+    </div>
+        
