@@ -3,6 +3,9 @@
     font-size: 18px;
 }
 
+html{
+    height: 100%;
+}
 
 body{
     margin: 0px;
@@ -24,11 +27,25 @@ main{
     }
     @include x_smallScreen{
         padding: 0%;
+        margin-top: 69px;
+    }
+
+    &.small-top{
+
+        @include x_smallScreen{
+            margin-top: 60px;
+        }
     }
 }
 
 main.smaller{
     min-height: calc(100vh - 150px);
+    @include smallScreen{
+        min-height: calc(100vh - 138px);
+    }
+    @include x_smallScreen{
+        min-height: calc(100vh - 135px);
+    }
 }
 
 
@@ -38,6 +55,9 @@ section.ban{
     height: 450px;
     background-image: url("includes/img/bg_index.jpg");
     background-size: cover;
+    @include x_smallScreen{
+        height: 250px;
+    }
 }
 
 
@@ -46,9 +66,10 @@ section.ban{
 
 section.bloc{
     box-sizing: border-box;
-    min-height: 430px;
-    @include x_smallScreen{
-        margin: 15% 0%;
+    padding: 20px 0 ;
+
+    &--pad{
+        padding: 50px;
     }
 
 } 
@@ -61,13 +82,12 @@ section.bloc{
     
     @include x_smallScreen{
         grid-template-columns: 1fr;
-        grid-column-gap: 1%;
     }
 }
 
 
 .bloc__collapse{
-    width: 350px;
+    //width: 350px;
     @include x_smallScreen{
         display: none;
     }
@@ -88,7 +108,22 @@ section.bloc--smallMargin{
 
 }
 
+.bloc_in_bloc{
+    display: grid;
+    grid-template-columns: 300px 300px;
+    grid-auto-flow: column;
+    margin: 20px 0 auto;
+    padding: 20px 0;
+    border-bottom: solid 2px;
+    align-items: center;
+    @include smallScreen{
+        display: block;
 
+        option{
+            font-size: 15px;
+        }
+    }
+}
 
 
 //// bloc title
@@ -104,7 +139,7 @@ h2.bloc__title{
     }
 
     @include x_smallScreen{
-        font-size: 2rem;
+        font-size: 25px;
     }
     
 }
@@ -112,14 +147,14 @@ h2.bloc__title{
 //// header title
 
 h3.header__title{
-    font-size:30px;
+    font-size:40px;
     letter-spacing: 4px;
-    color: $duck_blue;
-    background-color: rgba(51, 159, 209, 0.274);
+    color: $dark_grey;
+    background-color: rgba(236, 161, 75, 0.274);
     padding: 4px 14px;
     margin-bottom: 40px;
     @include x_smallScreen{
-        font-size: 25px;
+        font-size: 20px;
         margin-bottom: 20px;
     }
     
@@ -128,6 +163,15 @@ h3.header__title{
 
 h4{
     font-size: 25px;
+    display: block;
+    height: 50px;
+    @include x_smallScreen{
+        font-size: 20px;
+    }
+
+    @include smallScreen{
+        height: auto;
+    }
 }
 
 //// header subtitle
@@ -146,6 +190,12 @@ h5.header__subtitle{
     }
 }
 
+h5.subtitle{
+    font-size: 22px;
+    font-weight: bold;
+    color: $dark_grey;
+}
+
 
 //// h6
 
@@ -157,6 +207,11 @@ h6{
     @include x_smallScreen{
         font-size: 16px;
      }
+
+    &.ing__title{
+        text-align: center;
+        margin: 30px;
+    }
 }
 
 //// p
@@ -203,8 +258,8 @@ p.return{
     text-align: -webkit-center;
     border: solid grey;
 
-    @include x_smallScreen{
-        width: 95%;
+    @include smallScreen{
+        width: 85%;
     }
 
     &__header{
@@ -213,29 +268,41 @@ p.return{
         align-items: center;
         justify-content: center;
 
-        @include x_smallScreen{
-            height: 280px;
+        @include smallScreen{
+            height: 200px;
         }
+
         img{
             height: 300px;
             margin-top: 10px;
 
             &:hover{
-                transform: scale(1.1);
+                transform: scale(1.05);
+                @include smallScreen{
+                    transform: none;
+                }
             }
 
-            @include x_smallScreen{
-                height: auto;
-                width: 90%;
+            @include smallScreen{
+                height: 90%;
+                width: auto;
             }
         }
     }
 
     &__body{
-        height: 300px;
+        height: 450px;
 
-        @include x_smallScreen{
-            height: 150px;
+        .card__button{
+            margin-bottom: 10px;
+
+            @include smallScreen{
+                padding: 10px;
+            }
+        }
+
+        @include smallScreen{
+            height: auto;
         }
     }
     
@@ -263,7 +330,7 @@ p.return{
 
 
 .section-divider{
-    border-top: 3px solid $light_blue;
+    border-top: 3px solid $light_ocher;
     width: 100px;
     margin-bottom: 20px;
 
@@ -297,12 +364,26 @@ ul.pagination{
 ul{
     padding: 0%;
     text-align: justify;
+    
+    li{
+        list-style: none;
+        padding: 10px 0;
 
-}
+        &.list-group-item{
+            @include x_smallScreen{
+                font-size: 16px;
+            }
 
-li{
-    list-style: none;
-    padding: 10px;
+            &--p{
+                font-size: 20px;
+                padding: 15px;
+                @include smallScreen{
+                    font-size: 16px;
+                    padding: 8px;
+                }
+            }
+        }
+    }
 }
 
 
@@ -333,34 +414,63 @@ li{
 ////  form
 
 form{
-    margin-bottom: 5%;
-}
+    width: 60%;
+    padding: 5% 10%;
+    background-color: rgba(255, 255, 255, 0.8);
+    margin: auto;
+    border-radius: 5px;
 
-.form-control{
-    font-size: 18px;
-    @include x_smallScreen{
-        margin: 20px 0;
+    &.noPad{
+        padding: 0;
     }
-}
-
-.form-label--radio{
-    grid-column: 1/3;
+    @include smallScreen{
+        width: 80%;
+        padding: 5%;
+        text-align: -webkit-center;
+     }
 }
 
 .form__field{
     justify-content: center;
     margin: 3% auto;
-    width: 50%;
 
-    @include x_smallScreen{
-       width: 70%;
+    @include smallScreen{
+        width: 80%;
+        margin: 2% auto;
+     }
+    
+
+    &.form__field--90{
+        width: 90%;
     }
 
     &--radio{
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 200px repeat(6,70px);
         row-gap: 5px;
         align-items: center;
+        margin: auto;
+        justify-content: center;
+        margin: 20px 0 auto;
+        padding: 20px 0;
+        border-bottom: solid 2px;
+
+        @include smallScreen{
+            grid-template-columns: 100px 100px;
+            width: 70%;
+            margin: 0 auto;
+
+            .form-label--radio{
+                grid-column: 1/3;
+            }
+        }
+    }
+}
+
+label{
+    
+    @include smallScreen{
+        font-size: 16px;
     }
 }
 
@@ -369,16 +479,72 @@ input{
     height: 40px;
     border-radius: 5px;
     width: -webkit-fill-available;
-    font-size: 16px;
+    text-align: center;
     @include smallScreen{
-       height: 30px;
-       font-size: 15px;
+       height: 25px;
+       font-size: 16px;
+       text-align-last: center;
+    }
+
+    &.form-control{
+        font-size: 18px;
+        margin-top: 10px;
+
+        @include x_smallScreen{
+            margin: 15px 0;
+            font-size: 15px;
+        }
+    }
+    &.form-input--small{
+        width: 100px;
+    }
+
+    &.ing{
+        width: 300px;
+        margin: 2px;
+        text-align-last: center;
+        @include smallScreen{
+           width: 200px;
+           margin: 0 auto;
+        }
+    }
+
+    &.form-check-input{
+        height: 20px;
+    }
+
+    &#picture{
+        background: rgba(255, 140, 0, 0.733);
     }
 }
 
-input.form-check-input{
-    height: 20px;
+.field__ing{
+    padding: 40px;
+    text-align: -webkit-center;
+    margin: 20px 0 auto;
+    padding: 20px 0;
+    border-bottom: solid 2px;
+
+    @include smallScreen{
+       margin: 0 auto;
+    }
+
 }
+
+.steps{
+    margin: 20px 0;
+}
+
+
+legend{
+    margin: 20px 0;
+}
+
+select{
+    height: 40px;
+    border-radius: 5px;
+}
+
 
 textarea{
     border-radius: 5px;
@@ -399,6 +565,12 @@ textarea{
 .return_error{
     color: $error;
     font-weight:bold;
+    text-align: center;
+    font-size: 20px;
+    @include smallScreen{
+        font-size: 15px;
+        padding: 5px;
+    }
 
 }
 
@@ -409,7 +581,12 @@ textarea{
 .return_message{
     color: $succes;
     font-weight:bold;
-    
+    text-align: center;
+    font-size: 20px;
+    @include smallScreen{
+        font-size: 15px;
+        padding: 5px;
+    }
 }
 
 
@@ -423,7 +600,7 @@ textarea{
 
 .bigger{
 
-    font-size: 1.5rem;
+    font-size: 20px;
 }
 
 .connect{
@@ -434,4 +611,14 @@ textarea{
 
 .margin-top{
     margin-top: 2%;
+}
+
+.b0{
+    bottom: 0px;
+    position: relative;
+    padding: 10px;
+}
+
+.pad{
+    padding: 20px;
 }

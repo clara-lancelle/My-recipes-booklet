@@ -31,19 +31,15 @@ if(!empty($_POST)){
         <?php include "includes/navbar.php" ?>
     </header>
 
-    <main class="smaller index">
-
-
-    <section class="ban"></section>
-
-        <section class="bloc">
+    <main class="smaller index small-top">
+        <section class="bloc bloc--index">
 
         <h2 class="bloc__title" >Connexion :</h2>
             <?php if(empty($_SESSION['id'])){ ?>
 
                 <form action="#" name='connexion' method="post">
 
-                    <div class="form__field">
+                    <div class="form__field form__field--90">
                         <label for="email" class="form-label"> Votre email : </label>
                         <input type="email" class="form-control" id="email" name="email"
                         <?php 
@@ -75,7 +71,7 @@ if(!empty($_POST)){
                             </div>
                         <?php }?>
 
-                    <div class="form__field">
+                    <div class="form__field form__field--90">
                         <label for="password" class="form-label"> Mot de passe : </label>
                         <input type="password" class="form-control" id="password" name="password">
                         <?php if (isset($return['errors']['password'])) { ?>
@@ -91,16 +87,16 @@ if(!empty($_POST)){
                             
                 <?php }else{ ?>
 
-                    <div class="connect text-center bigger">
+                <div class="connect text-center bigger">
 
-                        <h3> Vous êtes connecté(e) ! </h3>
+                    <h3> Vous êtes connecté(e) ! </h3>
 
-                        <?php header("location: all_recipes.php");
-                        die(); ?>
+                    <?php header("location: all_recipes.php");
+                    die(); ?>
 
-                    </div>
-                <?php }?>
-            </section>
+                </div>
+            <?php }?>
+        </section>
     </main>
 <?php include "includes/footer.php"; ?>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>

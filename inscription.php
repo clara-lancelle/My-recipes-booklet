@@ -31,9 +31,8 @@ if(!empty($_POST)){
         <?php include "includes/navbar.php" ?>
     </header>
 
-    <main class="smaller">
-
-        <section class="bloc">
+    <main class="smaller ins small-top">
+        <section class="bloc ins">
 
             <h2 class="bloc__title"> Inscription : </h2>
 
@@ -53,7 +52,7 @@ if(!empty($_POST)){
                     </div>
                 <?php } ?>
                     
-                <div class="form__field">
+                <div class="form__field form__field--90">
                     <label for="lastname" class="form-label"> Votre nom : </label>
                     <input type="text" class="form-control" id="lastname" name="lastname"
                     <?php 
@@ -68,7 +67,7 @@ if(!empty($_POST)){
                     <?php } ?>
                 </div>
 
-                <div class="form__field">
+                <div class="form__field form__field--90">
                     <label for="firstname" class="form-label"> Votre prénom : </label>
                     <input type="text" class="form-control" id="firstname" name="firstname" 
                     <?php 
@@ -84,7 +83,7 @@ if(!empty($_POST)){
                     <?php } ?>
                 </div>
 
-                <div class="form__field">
+                <div class="form__field form__field--90">
                     <label for="email" class="form-label"> Votre email : </label>
                     <input type="email" class="form-control" id="email" name="email"
                     <?php 
@@ -104,12 +103,12 @@ if(!empty($_POST)){
                     <?php } ?>
                 </div>
 
-                <div class="form__field">
+                <div class="form__field form__field--90">
                     <label for="password" class="form-label"> Mot de passe : </label>
                     <input type="password" class="form-control" id="password" name="password">
                 </div>
 
-                <div class="form__field">
+                <div class="form__field form__field--90">
                     <label for="confirm_password" class="form-label"> Confirmer votre mot de passe : </label>
                     <input type="password" class="form-control" id="confirm_password" name="confirm_password">
                     <?php if (isset($return['errors']['confirm'])) { ?>
@@ -119,19 +118,18 @@ if(!empty($_POST)){
                     <?php } ?>
                 </div>
 
-                <div class="text-center">
-                    <button type="submit" class="btn">M'inscrire</button>
+                <div class="text-center pad">
+                    <button type="submit" class="btn btn--ins">M'inscrire</button>
                 </div>
             </form>
             <?php } ?>
 
             <?php if(!empty($_SESSION['id'])){ ?>
                 <div class="connect">
-
                     <p class="text-center bigger" >Vous êtes inscrit(e), bienvenue !</p>
-
                 </div>
-            <?php die(); } ?>
+            <?php header("location: my_recipes.php");
+            die(); } ?>
         </section>
     </main>
 <?php include "includes/footer.php"; ?> 

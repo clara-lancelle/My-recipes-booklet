@@ -3,7 +3,7 @@ session_start();
 ?>
 
 <!DOCTYPE html>
-<html lang="en" style="background-color:rgb(233, 233, 233);"> 
+<html lang="en"> 
 <head>
   <!-- Required meta tags -->
   <meta charset="utf-8" />
@@ -29,10 +29,10 @@ session_start();
 
         ?>
 
-        <section class="bloc text-center" >
-            <h6>Voulez-vous vous déconnecter du carnet de recettes ?</h6>
+        <section class="bloc text-center bloc--pad" >
+            <h6 class="pad">Voulez-vous vous déconnecter du carnet de recettes ?</h6>
                 <form action="#" method="post" enctype="multipart/form-data">
-                    <button class="logout btn" type="submit" name="logout" value="true">Me deconnecter</button>
+                    <button class="btn btn--logout" type="submit" name="logout" value="true">Me deconnecter</button>
                 </form>
 
             <?php

@@ -1,23 +1,31 @@
+ul.pagination{
+    grid-template-columns: 50px 30px 50px;
+    align-items: center;
+}
+
+
+
+
 .bi-caret-left-square{
-    color: $light_blue;
+    color: $light_ocher;
 }
 
 .bi-caret-right-square{
-    color: $light_blue;
+    color: $light_ocher;
 }
 
 .page-link--middle{
-    color: $light_blue;
+    color: $light_ocher;
 }
 
 .page-item.disabled{
 
     a{
-        color: $light_blue_disabled;
+        color: $light_ocher_disabled;
     }
     
     svg{
-        color: $light_blue_disabled;
+        color: $light_ocher_disabled;
     }
 }
 

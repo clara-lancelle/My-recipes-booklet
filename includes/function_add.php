@@ -16,6 +16,11 @@ function ttt_form(array $array, $file) {
 		$errors['title'] = ' Le titre n\'est pas renseigné ' ;
 	}
 
+	if (empty($data['cat'])) {
+		$status = STATUS_ERROR;
+		$errors['cat'] = 'La catégorie n\'est pas renseigné';
+	}
+
 	if (empty($data['guest'])) { 
 		$status = STATUS_ERROR;
 		$errors['guest'] = ' La quantité n\'est pas renseignée ';
@@ -36,6 +41,16 @@ function ttt_form(array $array, $file) {
     if (empty($data['price'])) {
 		$status = STATUS_ERROR;
 		$errors['price'] = 'Le coût n\'est pas renseigné';
+	}
+
+	if (empty($data['ing1'])) {
+		$status = STATUS_ERROR;
+		$errors['ing'] = 'Vous devez renseigner au moins un ingrédient';
+	}
+
+	if (empty($data['step1'])) {
+		$status = STATUS_ERROR;
+		$errors['step'] = 'Vous devez renseigner au moins une étape';
 	}
 
 	//valid_picture
@@ -68,7 +83,7 @@ function ttt_form(array $array, $file) {
 //valid_title	
 
 	function search($string){
-		$pattern = '/[^a-zA-ZÀ-ÖØ-öÿŸ\-\d\s]/';
+		$pattern = '/[^a-zA-ZÀ-ÖØ-öÿŸ\-\:\!\=\d\s]/';
 
 		$a = preg_match($pattern,$string)?true:false;
 
@@ -127,12 +142,26 @@ function getRecipe($array, $array_file, $id){
 	$status = STATUS_SUCCESS;
 	$errors = [];
 	$title = trim($data['title']);
+	$cat = $data['cat'];
 	$guest = $data['guest'];
 	$time = $data['time'];
 	$level = $data['level'];
 	$price = $data['price'];
+	$ing1 = $data['ing1'];
+	$ing2 = $data['ing2'];
+	$ing3 = $data['ing3'];
+	$ing4 = $data['ing4'];
+	$ing5 = $data['ing5'];
+	$ing6 = $data['ing6'];
+	$ing7 = $data['ing7'];
+	$ing8 = $data['ing8'];
+	$ing9 = $data['ing9'];
+	$step1 = $data['step1'];
+	$step2 = $data['step2'];
+	$step3 = $data['step3'];
+	$step4 = $data['step4'];
+	$step5 = $data['step5'];
 	$int_id = intval($id);
-
 
 	try {
 		$dbco = getConnexion();
@@ -160,8 +189,8 @@ function getRecipe($array, $array_file, $id){
 		$dbco->beginTransaction();
 
 			$sth = $dbco->prepare("
-							INSERT INTO recipe(recipe_title,guest_number,setup_time,level,price,author_id)
-							VALUES (:title, :guest, :setup, :level, :price, :author_id)");
+							INSERT INTO recipe(recipe_title,guest_number,setup_time,level,price,author_id,type)
+							VALUES (:title, :guest, :setup, :level, :price, :author_id, :type)");
 
 				$sth -> bindParam(':title', $title);
 				$sth -> bindParam(':guest', $guest);
@@ -169,19 +198,62 @@ function getRecipe($array, $array_file, $id){
 				$sth -> bindParam(':level', $level);
 				$sth -> bindParam(':price', $price);
 				$sth -> bindParam(':author_id', $int_id);
+				$sth -> bindParam(':type', $cat);
 
 				$sth->execute();
+
+				// recipe_id
 					
-					$sql = $dbco->prepare("
-					SELECT recipe_id FROM recipe 
-					WHERE recipe_title = :title && author_id = :author_id");
+				$sql = $dbco->prepare("
+				SELECT recipe_id FROM recipe 
+				WHERE recipe_title = :title && author_id = :author_id");
 
-					$sql -> bindParam(':title', $title);
-					$sql -> bindParam(':author_id', $int_id);
+				$sql -> bindParam(':title', $title);
+				$sql -> bindParam(':author_id', $int_id);
 
-					$sql->execute();
+				$sql->execute();
 
-					$recipe_id = $sql->fetch();
+				$recipe_id = $sql->fetch();
+
+				//components
+
+				$sql = $dbco->prepare("
+				INSERT INTO components(fk_recipe_id, field_ingredient1,
+					field_ingredient2, field_ingredient3, field_ingredient4,
+					field_ingredient5, field_ingredient6, field_ingredient7, field_ingredient8, field_ingredient9)
+				VALUES (:id, :ing1, :ing2, :ing3, :ing4, :ing5, :ing6, :ing7, :ing8, :ing9) 
+				");
+
+				$sql -> bindParam(':id', $recipe_id['recipe_id']);
+				$sql -> bindParam(':ing1', $ing1);
+				$sql -> bindParam(':ing2', $ing2);
+				$sql -> bindParam(':ing3', $ing3);
+				$sql -> bindParam(':ing4', $ing4);
+				$sql -> bindParam(':ing5', $ing5);
+				$sql -> bindParam(':ing6', $ing6);
+				$sql -> bindParam(':ing7', $ing7);
+				$sql -> bindParam(':ing8', $ing8);
+				$sql -> bindParam(':ing9', $ing9);
+
+				$sql->execute();
+
+
+				// steps
+
+				$sql = $dbco->prepare("
+					INSERT INTO bloc_steps(step1, step2, step3, step4, step5, fk_recipe_id)
+					VALUES (:step1, :step2, :step3, :step4, :step5, :id)
+				");
+
+				$sql -> bindParam(':step1', $step1);
+				$sql -> bindParam(':step2', $step2);
+				$sql -> bindParam(':step3', $step3);
+				$sql -> bindParam(':step4', $step4);
+				$sql -> bindParam(':step5', $step5);
+				$sql -> bindParam(':id', $recipe_id['recipe_id']);
+
+				$sql->execute();
+
 
 				//picture//
 					$tmpName = $data_pic['picture']['tmp_name'];
@@ -200,7 +272,7 @@ function getRecipe($array, $array_file, $id){
 
 						$sth->execute();
 
-						move_uploaded_file($tmpName, '../Pictures/'.$file);
+						move_uploaded_file($tmpName,'C:\wamp64\www\TD_RECIPES/Pictures/'.$file);
 
 				$dbco->commit();
 
@@ -213,7 +285,7 @@ function getRecipe($array, $array_file, $id){
 		}
 	
 
-	if ($status === STATUS_ERROR) {
+	if($status === STATUS_ERROR) {
 		return [
 			'success' => false,
 			'errors' => $errors,

@@ -33,11 +33,16 @@ function getRecipes($session_id, $current_page){
             $first = ($current_page * $parPage) - $parPage;
 
             $sth = $dbco->prepare("
-                SELECT picture.name, recipe.*
+                SELECT picture.name, recipe.*, components.*, bloc_steps.*
                 FROM picture 
                 INNER JOIN recipe 
                 ON picture.recipe_id = recipe.recipe_id 
                 && recipe.author_id = :author_id
+                INNER JOIN components
+                ON components.fk_recipe_id = recipe.recipe_id
+                INNER JOIN bloc_steps
+                ON bloc_steps.fk_recipe_id = recipe.recipe_id
+
                 ORDER BY recipe.recipe_title ASC
                 LIMIT :first, :parpage
                 ");

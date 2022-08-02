@@ -71,7 +71,7 @@ include "includes/function_my_recipes.php";
                                 class="card__img" alt="votre image" >';
                             ?> 
                         </div>
-                        <div class="card__body">
+                        <div class="card__body b0">
                             <?php
                                 echo '<h4 class="card__body__title">'.ucfirst($recipe['recipe_title']).'</h4>';
                             ?>
@@ -82,10 +82,16 @@ include "includes/function_my_recipes.php";
                             </button>
                         
                             <div id="<?php echo 'drop-collapse'.$i;?>" class="bloc__collapse">
+                            <div class="card__button"> 
+                                    <form class="noPad" action="http://localhost/TD_RECIPES/recipe_extension.php" method="get" enctype="multipart/form-data">
+                                        <button type="submit" class="btn btn--extend" name="extend_btn" <?php echo 'value="'.$recipe['recipe_id'].'"'; ?> > <i class="bi bi-box-arrow-up-right"></i> </button>
+                                    </form>
+                            </div>
                                 <?php
                                     echo 
                                     '<ul class="list-group">
-                                        <li class="list-group-item "> <i class="bi bi-people-fill"></i> Pour '.$recipe['guest_number'].' personnes</li>
+                                        <li class="list-group-item "> <i class="bi bi-tag"></i> Catégorie : '.$recipe['type'].'</li>
+                                        <li class="list-group-item "> <i class="bi bi-people-fill"></i> Pour '.$recipe['guest_number'].' personnes </li>
                                         <li class="list-group-item "> <i class="bi bi-hourglass-bottom"></i> Temps de préparation : '.$recipe['setup_time'].'</li>
                                         <li class="list-group-item ">';
                                         if($recipe['level']=='faible'){
@@ -133,12 +139,12 @@ include "includes/function_my_recipes.php";
                                                 <i class="bi bi-circle-fill"></i>
                                                 : Coût élevé';
                                         }
-                                        '</li>';    
-                                    ?>
-                                </ul>
+                                        ?>
+                                        </li>
+                                    </ul>  
                                 <div class="card__button"> 
-                                    <form action="http://localhost/TD_RECIPES/edit_recipes.php" method="get" enctype="multipart/form-data">
-                                        <button type="submit" class="btn" name="edit_btn" <?php echo 'value="'.$recipe['recipe_id'].'"'; ?> style="background-color: rgb(63, 66, 62); color:white; border-radius:10px; padding: 5px;" > Modifier ma recette </button>
+                                    <form class="noPad" action="http://localhost/TD_RECIPES/edit_recipes.php" method="get" enctype="multipart/form-data">
+                                        <button type="submit" class="btn btn--edit" name="edit_btn" <?php echo 'value="'.$recipe['recipe_id'].'"'; ?> > <i class="bi bi-pencil-fill"></i> Editer  </button>
                                     </form>
                                 </div>
                                 <?php $i++;?>
@@ -154,10 +160,7 @@ include "includes/function_my_recipes.php";
                 <li class="page-item <?= ($current_page_nb <= 1) ? "disabled" : "" ?>">
                     <a class="page-link" href="?page=<?= $current_page_nb - 1 ?>" aria-label="Previous" >
                         <span aria-hidden="true">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-left-square" viewBox="0 0 16 16">
-                                <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
-                                <path d="M10.205 12.456A.5.5 0 0 0 10.5 12V4a.5.5 0 0 0-.832-.374l-4.5 4a.5.5 0 0 0 0 .748l4.5 4a.5.5 0 0 0 .537.082z"/>
-                            </svg>
+                        <i class="bi bi-chevron-left"></i>
                         </span>
                     </a>
                 </li>
@@ -171,10 +174,7 @@ include "includes/function_my_recipes.php";
                 <li class="page-item <?= ($current_page_nb == $pages) ? "disabled" : "" ?>">
                     <a class="page-link" href="?page=<?= $current_page_nb + 1 ?>" aria-label="Next">
                         <span aria-hidden="true">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-caret-right-square" viewBox="0 0 16 16">
-                                <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
-                                <path d="M5.795 12.456A.5.5 0 0 1 5.5 12V4a.5.5 0 0 1 .832-.374l4.5 4a.5.5 0 0 1 0 .748l-4.5 4a.5.5 0 0 1-.537.082z"/>
-                            </svg>
+                        <i class="bi bi-chevron-right"></i>
                         </span>
                     </a>
                 </li>

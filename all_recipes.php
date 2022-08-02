@@ -55,21 +55,27 @@ if(isset($_GET['page']) && !empty($_GET['page'])){
                                 echo '<img src="http://localhost/TD_RECIPES/Pictures/'.$array['name'].'"  alt="image">';                  
                             ?>
                         </div>
-                        <div class="card__body">
+                        <div class="card__body b0">
                         <?php
                             echo '<h4 class="card__body__title">'.ucfirst($array['recipe_title']).'</h4>';
                             ?>
 
-                            <button class="btn btn--collapse" id="collapse_btn"  type="button" data-toggle="collapse" data-target="<?php echo '#drop-collapse'.$i;?>">
+                            <button class="btn--collapse btn" id="collapse_btn" type="button">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16">
                                     <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/>
                                 </svg>
                             </button>
     
-                            <div id="<?php echo 'drop-collapse'.$i;?>" class="bloc__collapse">
+                            <div class="bloc__collapse">
+                            <div class="card__button"> 
+                                <form class="noPad" action="http://localhost/TD_RECIPES/recipe_extension.php" method="get" enctype="multipart/form-data">
+                                    <button type="submit" class="btn btn--extend" name="extend_btn" <?php echo 'value="'.$array['recipe_id'].'"'; ?> > <i class="bi bi-box-arrow-up-right"></i> </button>
+                                </form>
+                            </div>
                                 <?php    
                                     echo 
                                     '<ul class="list-group">
+                                        <li class="list-group-item "> <i class="bi bi-tag"></i> Catégorie : '.$array['type'].'</li>
                                         <li class="list-group-item"><i class="bi bi-people-fill"></i> Pour '.$array['guest_number'].' personnes </li>
                                         <li class="list-group-item"> <i class="bi bi-hourglass-bottom"></i> Temps de préparation : '.$array['setup_time'].'</li>
                                         <li class="list-group-item">';
@@ -126,8 +132,8 @@ if(isset($_GET['page']) && !empty($_GET['page'])){
 
                                 if($user_id == $array['author_id']){?>
                                 <div class="card__button"> 
-                                    <form action="http://localhost/TD_RECIPES/edit_recipes.php" method="get" enctype="multipart/form-data" >
-                                        <button class="btn btn--edit " type="submit" name="edit_btn" <?php echo 'value="'.$array['recipe_id'].'"'; ?>>Editer</button>
+                                    <form class="noPad" action="http://localhost/TD_RECIPES/edit_recipes.php" method="get" enctype="multipart/form-data" >
+                                        <button class="btn btn--edit " type="submit" name="edit_btn" <?php echo 'value="'.$array['recipe_id'].'"'; ?>><i class="bi bi-pencil-fill"></i> Editer</button>
                                     </form>
                                 </div>
                                 <?php }
@@ -144,7 +150,7 @@ if(isset($_GET['page']) && !empty($_GET['page'])){
                 <li class="page-item <?= ($current_page_nb <= 1) ? "disabled" : "" ?>">
                     <a class="page-link" href="?page=<?= $current_page_nb - 1 ?>" aria-label="Previous" >
                         <span aria-hidden="true">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-left-square" viewBox="0 0 16 16">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-caret-left-square" viewBox="0 0 16 16">
                                 <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
                                 <path d="M10.205 12.456A.5.5 0 0 0 10.5 12V4a.5.5 0 0 0-.832-.374l-4.5 4a.5.5 0 0 0 0 .748l4.5 4a.5.5 0 0 0 .537.082z"/>
                             </svg>

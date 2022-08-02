@@ -12,13 +12,26 @@
     &--collapse{
         width: 50px;
         display: none;
+        margin-bottom: 10px;
+        background-color: rgba(116,179,14,255);
+        border: outset rgba(102, 158, 12, 0.603);
+
+        svg{
+            margin: auto;
+            display: block;
+            color: rgb(255, 255, 255);
+        }
 
         @include x_smallScreen{
             display: block;
 
          }
+    }
 
-         
+    &--edit{
+        background-color: rgb(63, 66, 62);
+        color:white; 
+        padding: 2% 1%;
     }
 
     &--center{
@@ -26,15 +39,59 @@
     }
 
     &--log{
-        
+        background-color:rgba(243, 43, 43, 0.904);
+        border: outset rgba(170, 80, 59, 0.5) ;
+        color: white;
+        padding: 10px;
         @include x_smallScreen{
-            width: 100px;
+            width: 150px;
         }
     }
+
+    &--logout{
+        width: 150px;
+        padding: 15px;
+        margin: 20px auto;
+        background-color: rgba(191,192,82,255);
+        color: $dark_grey;
+        border: solid $dark_grey 1px;
+    }
+
+    &--extend{
+        width: 50px;
+        height:50px;
+        border-radius: 30px;
+        background-color: rgb(221, 119, 35);
+        color: white;
+        border:  rgb(163, 87, 24);
+    }
+
+    &--ins{
+        background-color: rgba(251,147,0,255);
+        color: white;
+        padding: 10px;
+        border: outset rgba(182, 109, 6, 0.884);
+
+        @include x_smallScreen{
+            font-size: 15px;
+            padding: 8px;
+            
+        }
+    }
+
+
+    &--add{
+        margin: 30px auto;
+        background: #d10000e8;
+        color: white;
+        padding: 10px;
+    }
+
 
     &:hover{
         box-shadow: 5px 8px 5px rgba(37, 40, 56, 0.31);
         transform: scale(1.01);
+        cursor: pointer;
     }
 
 

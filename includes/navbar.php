@@ -5,7 +5,7 @@
         </figure>
 
         <div class="navbar__brand">
-            <h1>Booklet</h1>
+            <h1>My Recipes Booklet</h1>
         </div>
 
         <div id="menu-button">
@@ -20,26 +20,26 @@
                     if(empty($_SESSION['id'])){ 
                 ?>
                     <li class="navbar__items__link">
-                        <a <?php echo $current_page == "log" ? 'class="drop_scroll active"' : 'class="drop_scroll"' ;?> href="http://localhost/TD_RECIPES/index.php" >Me connecter</a>
+                        <a <?php echo $current_page == "log" ? 'class="page__link active"' : 'class="page__link"' ;?> href="http://localhost/TD_RECIPES/index.php" >Me connecter</a>
                     </li>
                     <li class="navbar__items__link">
-                        <a <?php echo $current_page == "ins" ? 'class="drop_scroll active"': 'class="drop_scroll"' ;?> href="http://localhost/TD_RECIPES/inscription.php" >M'inscire</a>
+                        <a <?php echo $current_page == "ins" ? 'class="page__link active"': 'class="page__link"' ;?> href="http://localhost/TD_RECIPES/inscription.php" >M'inscire</a>
                     </li>
                 <?php } ?>
                 <?php
                     if(!empty($_SESSION['id'])){ 
                 ?>
                     <li class="navbar__items__link"> 
-                        <a <?php echo $current_page == "my" ? 'class="drop_scroll active"': 'class="drop_scroll"' ;?> href="http://localhost/TD_RECIPES/my_recipes.php">Mes recettes</a>    
+                        <a <?php echo $current_page == "my" ? 'class="page__link active"': 'class="page__link"' ;?> href="http://localhost/TD_RECIPES/my_recipes.php">Mes recettes</a>    
                     </li>
                     <li class="navbar__items__link"> 
-                        <a <?php echo $current_page == "all" ? 'class="drop_scroll active" ': 'class="drop_scroll"' ;?> href="http://localhost/TD_RECIPES/all_recipes.php/?page=1">Toutes les recettes</a> 
+                        <a <?php echo $current_page == "all" ? 'class="page__link active" ': 'class="page__link"' ;?> href="http://localhost/TD_RECIPES/all_recipes.php/?page=1">Toutes les recettes</a> 
                     </li>
                     <li class="navbar__items__link"> 
-                        <a <?php echo $current_page == "add" ? 'class="drop_scroll active" ': 'class="drop_scroll"' ;?>  href="http://localhost/TD_RECIPES/add_recipe.php">Ajouter une recette</a> 
+                        <a <?php echo $current_page == "add" ? 'class="page__link active" ': 'class="page__link"' ;?>  href="http://localhost/TD_RECIPES/add_recipe.php">Ajouter une recette</a> 
                     </li>
                     <li class="navbar__items__link"> 
-                        <a <?php echo $current_page == "out" ? 'style=" text-decoration:none;color:white;" ': 'class="drop_scroll"' ;?> href="http://localhost/TD_RECIPES/logout.php" >Me déconnecter</a>
+                        <a <?php echo $current_page == "out" ? 'class="page__link active"': 'class="page__link"' ;?> href="http://localhost/TD_RECIPES/logout.php" >Me déconnecter</a>
                     </li>
                 <?php }?>  
             </ul>

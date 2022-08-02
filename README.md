@@ -28,7 +28,7 @@ You will see your recipes on your personnal page where you can also modify them.
 
 ##### it's done !
 
-### Whithout Git Bash : 
+### Without Git Bash : 
 
 * click on the green code button on the repository page
 

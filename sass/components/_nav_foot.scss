@@ -1,6 +1,6 @@
 .navbar{
     justify-content: center;
-    background-color: rgba(191,46,33,0.8);
+    background-color: rgba(206,6,18,0.9);
     width: -webkit-fill-available;
     top: 0px;
     z-index: 1;
@@ -8,9 +8,9 @@
     display: grid;
     grid-template-rows: 1fr;
     padding: 5px;
-    grid-column-gap: 100px;
+    grid-column-gap: 5px;
 
-    @include x_smallScreen{
+    @include smallScreen{
         grid-auto-flow: column;
         align-items: center;
         justify-content: space-around;
@@ -21,7 +21,7 @@
         margin: 2px;
         grid-row: 1;
         .logo{
-            border-radius: 50px;
+            border-radius: 10px;
             width: 60px;
             @include x_smallScreen{
                 width: 50px;
@@ -34,10 +34,15 @@
         color: white;
         grid-row: 1;
         align-self: center;
+        margin-right: 30px;
 
         h1{
             font-size: 25px;
             font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+
+            @include x_smallScreen{
+                font-size: 22px;
+            }
         }
         
     }
@@ -57,11 +62,11 @@
             justify-items: center; 
             column-gap: 10px;
 
-            @include x_smallScreen{
+            @include smallScreen{
                 grid-template-columns: 1fr;
             }
 
-            .navbar__items__link{
+            li.navbar__items__link{
 
                 a{
                     color: #ccccce;
@@ -71,12 +76,13 @@
                         font-size: 18px;
                     }
 
-                    @include x_smallScreen{
-                        font-size: 15px;
-                    }
-
                     &:hover{
                         color: rgb(255, 255, 255);
+                    }
+
+                    &.active{
+                        color: rgb(255, 255, 255);
+                        
                     }
                 }
             }
@@ -90,12 +96,12 @@
 
 // hamburger menu
 
-@include x_smallScreen{
+@include smallScreen{
 
 
 
     #menu-button{
-        background: rgb(27 25 41 / 95%);
+        background: rgba(254,143,17,255);
         width: 60px;
         border-radius: 30px;
         position: relative;
@@ -103,19 +109,25 @@
         transition: all linear 0.3s;
         padding: 2px;
         z-index: 99;
+            @include x_smallScreen{
+                width: 40px;
+            }
       }
       
       #menu-button.active{
-        background: rgb(177 2 2);
+        background: rgb(250, 185, 111);
         color: #fff;
       }
       #line-1,#line-2,#line-3{
-        background: rgb(210, 211, 211);
+        background: rgb(254, 255, 255);
         width: 30px;
         height: 6px;
         margin: 6px auto;
         border-radius: 2px;
         transition: all linear 0.3s;
+            @include x_smallScreen{
+                width: 20px;
+            }
        
       }
       
@@ -136,7 +148,6 @@
       #menu{
         padding: 10px;
         padding-top: 30px;
-        color: #fff;
         font-family: arial;
         font-size: 1.5rem;
         display: none;
@@ -145,15 +156,19 @@
         border-radius: 5px;
         background: inherit;
         width: inherit;
-      }
-      
-      #menu ul{
-        list-style: none;
-        justify-items: start;
-      }
-      
-      #menu ul li{
-        margin: 8px 0;
+
+        ul{
+            list-style: none;
+            justify-items: start;
+
+            li{
+                margin: 8px 0;
+
+                a{
+                    color: rgb(255, 255, 255);
+                }
+              }
+          }
       }
       
     
@@ -172,6 +187,15 @@ footer{
     align-items: center;
     display: flex;
     justify-content: center;
+
+    &.smallHtml{
+        position: absolute;
+        bottom: 0px;
+        
+        @include smallScreen{
+            position: inherit;
+        }
+    }
 
     p{
         
