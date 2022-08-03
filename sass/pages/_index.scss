@@ -4,11 +4,15 @@ main.index{
     background-image: url("includes/img/bg_index.jpg");
     background-size: cover;
     text-align: center;
-    background-position-x: -200px;
 }
 section.bloc--index{
     margin: 160px 20px;
-    background-color: rgba(236,233,232,0.9);
     display: inline-block;
     width: 85%;
+
+    h2{
+        color: white;
+        padding: 10px;
+        background: rgba(255,195,73, 0.9);
+    }
 }

@@ -15,14 +15,14 @@ body{
 
 
 main{
-    max-width: 1300px;
+    max-width: 1400px;
     margin: auto;
     padding-bottom: 12px;
     margin-top: 78px;
     min-height: 1000px;
 
     @include smallScreen{
-        max-width: 990px;
+        max-width: 100%;
         padding: 0% 3%;
     }
     @include x_smallScreen{
@@ -133,9 +133,14 @@ h2.bloc__title{
     text-align:center;
     font-size: 2.5rem;
     color: $dark_grey;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 
     &--pad{
         padding: 4% 0%;
+    }
+
+    &--bg{
+        background: white;
     }
 
     @include x_smallScreen{
@@ -165,11 +170,11 @@ h4{
     font-size: 25px;
     display: block;
     height: 50px;
-    @include x_smallScreen{
+    @include smallScreen{
         font-size: 20px;
     }
 
-    @include smallScreen{
+    @include x_smallScreen{
         height: auto;
     }
 }
@@ -257,9 +262,17 @@ p.return{
     width: 600px;
     text-align: -webkit-center;
     border: solid grey;
+    background-color: white;
+    border-radius: 10px;
 
     @include smallScreen{
         width: 85%;
+    }
+
+    &--orange{
+        background: rgba(233,99,38,255);
+        border: none;
+        border-radius: 10px;
     }
 
     &__header{
@@ -291,7 +304,7 @@ p.return{
     }
 
     &__body{
-        height: 450px;
+        height: 500px;
 
         .card__button{
             margin-bottom: 10px;
@@ -301,7 +314,7 @@ p.return{
             }
         }
 
-        @include smallScreen{
+        @include x_smallScreen{
             height: auto;
         }
     }
@@ -330,9 +343,14 @@ p.return{
 
 
 .section-divider{
-    border-top: 3px solid $light_ocher;
-    width: 100px;
-    margin-bottom: 20px;
+
+    display: none;
+    @include smallScreen {
+        border-top: 3px solid rgb(192, 92, 9);
+        width: 230px;
+        margin: 20px 0 0 0;
+        display: block;
+    }
 
 }
 
@@ -416,13 +434,18 @@ ul{
 form{
     width: 60%;
     padding: 5% 10%;
-    background-color: rgba(255, 255, 255, 0.8);
     margin: auto;
     border-radius: 5px;
 
     &.noPad{
         padding: 0;
     }
+
+    &.form--bg{
+        background-color: rgba(255, 255, 255, 0.8);
+    }
+
+
     @include smallScreen{
         width: 80%;
         padding: 5%;
@@ -514,7 +537,7 @@ input{
     }
 
     &#picture{
-        background: rgba(255, 140, 0, 0.733);
+        background:  rgba(250,209,205,255);
     }
 }
 

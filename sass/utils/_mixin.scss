@@ -1,12 +1,12 @@
 
 @mixin smallScreen {
-    @media screen and(max-width: 1120px) {
-        @content;
+    @media screen and(max-width: 1290px) {
+        @content
     }
 }
 
 @mixin x_smallScreen {
-    @media screen and(max-width: 699px) {
+    @media screen and(max-width: 790px) {
         @content;
     }
 }

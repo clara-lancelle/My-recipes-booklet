@@ -13,13 +13,18 @@
         width: 50px;
         display: none;
         margin-bottom: 10px;
-        background-color: rgba(116,179,14,255);
-        border: outset rgba(102, 158, 12, 0.603);
+        background-color: rgba(148,207,201,255);
+        border: outset rgba(110, 153, 149, 0.89);
 
         svg{
             margin: auto;
             display: block;
             color: rgb(255, 255, 255);
+        }
+
+        &--my{
+            background-color: rgba(93,168,189,255);
+            border: outset rgba(65, 117, 131, 0.9);
         }
 
         @include x_smallScreen{
@@ -29,9 +34,13 @@
     }
 
     &--edit{
-        background-color: rgb(63, 66, 62);
+        background-color: rgba(45,89,116,255);
         color:white; 
         padding: 2% 1%;
+
+        &--my{
+            background-color: rgba(78,78,88,255);
+        }
     }
 
     &--center{
@@ -39,8 +48,8 @@
     }
 
     &--log{
-        background-color:rgba(243, 43, 43, 0.904);
-        border: outset rgba(170, 80, 59, 0.5) ;
+        background-color: rgba(122,196,145,255);
+        border: outset rgba(51, 146, 122, 0.5) ;
         color: white;
         padding: 10px;
         @include x_smallScreen{
@@ -58,12 +67,16 @@
     }
 
     &--extend{
-        width: 50px;
-        height:50px;
+        width: 60px;
+        height: 60px;
         border-radius: 30px;
-        background-color: rgb(221, 119, 35);
+        background-color: rgba(238,157,104,255);
         color: white;
-        border:  rgb(163, 87, 24);
+        border: solid $grey;
+
+        &--my{
+            background-color: rgba(187,96,137,255);
+        }
     }
 
     &--ins{

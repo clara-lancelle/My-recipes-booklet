@@ -42,8 +42,8 @@ if(isset($_GET['page']) && !empty($_GET['page'])){
     </header>
 
     <main>
-        <section class="bloc">
-            <h2 class="bloc__title">Toutes les recettes</h2>
+        <section class="bloc bg_card">
+            <h2 class="bloc__title bloc__title--bg">Toutes les recettes</h2>
             <div class="bloc__body--card">
                 <?php
                 $i = 0;

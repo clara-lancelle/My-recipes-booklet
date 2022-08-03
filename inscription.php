@@ -38,7 +38,7 @@ if(!empty($_POST)){
 
             <?php if(empty($_SESSION['id'])){ ?>
 
-                <form action="#" name='inscription' method="post">
+                <form  class="form--bg" action="#" name='inscription' method="post">
 
                 <?php if (isset($return['errors']['db'])) { ?>
                     <div class="return_error">

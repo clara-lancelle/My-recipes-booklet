@@ -37,7 +37,7 @@ if(!empty($_POST)){
         <h2 class="bloc__title" >Connexion :</h2>
             <?php if(empty($_SESSION['id'])){ ?>
 
-                <form action="#" name='connexion' method="post">
+                <form  class="form--bg" action="#" name='connexion' method="post">
 
                     <div class="form__field form__field--90">
                         <label for="email" class="form-label"> Votre email : </label>

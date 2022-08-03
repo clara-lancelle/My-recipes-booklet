@@ -45,8 +45,8 @@ include "includes/function_my_recipes.php";
 
     <main>
 
-        <section class="bloc">
-            <h2 class="bloc__title">Mes recettes</h2>
+        <section class="bloc bg_card_my">
+            <h2 class="bloc__title bloc__title--bg">Mes recettes</h2>
             <div <?php echo isset($return['error']) ? 'class="bloc__body error--grid"' : 'class="bloc__body--card"' ?> > 
             
                 <?php 
@@ -71,11 +71,13 @@ include "includes/function_my_recipes.php";
                                 class="card__img" alt="votre image" >';
                             ?> 
                         </div>
+                        <div class="section-divider"></div>
+
                         <div class="card__body b0">
                             <?php
                                 echo '<h4 class="card__body__title">'.ucfirst($recipe['recipe_title']).'</h4>';
                             ?>
-                            <button class="btn btn--collapse" type="button" data-toggle="collapse" data-target="<?php echo '#drop-collapse'.$i;?>">
+                            <button class="btn btn--collapse btn--collapse--my" type="button" data-toggle="collapse" data-target="<?php echo '#drop-collapse'.$i;?>">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16">
                                     <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/>
                                 </svg>
@@ -84,7 +86,7 @@ include "includes/function_my_recipes.php";
                             <div id="<?php echo 'drop-collapse'.$i;?>" class="bloc__collapse">
                             <div class="card__button"> 
                                     <form class="noPad" action="http://localhost/TD_RECIPES/recipe_extension.php" method="get" enctype="multipart/form-data">
-                                        <button type="submit" class="btn btn--extend" name="extend_btn" <?php echo 'value="'.$recipe['recipe_id'].'"'; ?> > <i class="bi bi-box-arrow-up-right"></i> </button>
+                                        <button type="submit" class="btn btn--extend btn--extend--my" name="extend_btn" <?php echo 'value="'.$recipe['recipe_id'].'"'; ?> > <i class="bi bi-box-arrow-up-right"></i> </button>
                                     </form>
                             </div>
                                 <?php
@@ -144,7 +146,7 @@ include "includes/function_my_recipes.php";
                                     </ul>  
                                 <div class="card__button"> 
                                     <form class="noPad" action="http://localhost/TD_RECIPES/edit_recipes.php" method="get" enctype="multipart/form-data">
-                                        <button type="submit" class="btn btn--edit" name="edit_btn" <?php echo 'value="'.$recipe['recipe_id'].'"'; ?> > <i class="bi bi-pencil-fill"></i> Editer  </button>
+                                        <button type="submit" class="btn btn--edit btn--edit--my" name="edit_btn" <?php echo 'value="'.$recipe['recipe_id'].'"'; ?> > <i class="bi bi-pencil-fill"></i> Editer  </button>
                                     </form>
                                 </div>
                                 <?php $i++;?>

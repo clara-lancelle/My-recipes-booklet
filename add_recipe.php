@@ -37,11 +37,11 @@ if(isset($return_form['success'])&& $return_form['success']=== true){
 </header>
 
 
-    <main class="add">
-        <section class="bloc">
+    <main>
+        <section class="bloc add">
             <h2 class="bloc__title">Ajouter une recette</h2>
             <div class="bloc__body--form">
-                <form action="#" name='recipe' method="post" enctype="multipart/form-data">
+                <form class="form--bg" action="#" name='recipe' method="post" enctype="multipart/form-data">
 
                     <?php 
                     if(isset($return_recipe['message'])){

@@ -53,7 +53,7 @@ session_start();
                     }
         ?>
                 
-            <form action="#" name='form' method="post" enctype="multipart/form-data">
+            <form  class="form--bg" action="#" name='form' method="post" enctype="multipart/form-data">
 
                 <?php
                     if(isset($data['errors']['empty'])){
