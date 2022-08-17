@@ -37,6 +37,7 @@
         background-color: rgba(45,89,116,255);
         color:white; 
         padding: 2% 1%;
+        height: 50px;
 
         &--my{
             background-color: rgba(78,78,88,255);
@@ -61,18 +62,19 @@
         width: 150px;
         padding: 15px;
         margin: 20px auto;
-        background-color: rgba(191,192,82,255);
-        color: $dark_grey;
-        border: solid $dark_grey 1px;
+        background-color: #ff8800cc;
+        color: white;
+        border: solid #c5821a 2px;
     }
 
     &--extend{
-        width: 60px;
-        height: 60px;
-        border-radius: 30px;
-        background-color: rgba(238,157,104,255);
+        width: 150px;
+        height: 50px;
+        border-radius: 10px;
+        background-color: rgb(231 142 83 / 94%);
         color: white;
-        border: solid $grey;
+        border: solid rgb(193 124 90 / 78%);
+
 
         &--my{
             background-color: rgba(187,96,137,255);
@@ -100,6 +102,31 @@
         padding: 10px;
     }
 
+    &.filter_button{
+        padding: 15px 1px;
+        color: $dark_grey;
+        background: white;
+        border: 3px solid #87cdc5;
+        width: 160px;
+        font-size: 17px;
+        margin: 0 4px;
+
+        &.selected{
+            background-color: #ffc300;
+        }
+
+        &--supp{
+            border: 3px solid #b36464;
+            color: darkred;
+        }
+        @include x_smallScreen{
+            padding: 5px 1px;
+            border: 1px solid;
+            font-size: 15px;
+            margin: 2px 4px;
+            border-radius: 4px;
+        }
+    }
 
     &:hover{
         box-shadow: 5px 8px 5px rgba(37, 40, 56, 0.31);

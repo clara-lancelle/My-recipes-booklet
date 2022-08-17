@@ -25,14 +25,13 @@ include "includes/function_this_recipe.php";
     }
     
 ?>
-?>
 <!DOCTYPE html>
 <html lang="en"> 
 <head>
   <!-- Required meta tags -->
   <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" href="http://localhost/TD_RECIPES/includes/img/favicon.png" type="image/png">
+  <link rel="icon" href="/includes/img/favicon.png" type="image/png">
   <Link href="style.css" rel="stylesheet" type="text/css" />
   
   <title>Mes recettes - Pages </title>
@@ -45,7 +44,8 @@ include "includes/function_this_recipe.php";
         
         <?php 
         $current_page = 'extension';
-        include "includes/navbar.php" ?>
+        include "includes/navbar.php" 
+        ?>
     </header>
 
     <main>
@@ -70,7 +70,7 @@ include "includes/function_this_recipe.php";
                     </div>
                     <div class="bloc__header">
                         <?php 
-                        echo '<img src="http://localhost/TD_RECIPES/Pictures/'.$value['name'].'" 
+                        echo '<img src="/Pictures/'.$value['name'].'" 
                             class="bloc__header__img" alt="votre image" >';
                         ?> 
                     </div>
@@ -157,11 +157,13 @@ include "includes/function_this_recipe.php";
                                 }
                             ?>
                         </ul>
+                        <?php if($user_id == $value['author_id']){?>
                         <div class="card__button"> 
-                            <form action="http://localhost/TD_RECIPES/edit_recipes.php" method="get" enctype="multipart/form-data">
+                            <form action="/edit_recipes.php" method="get" enctype="multipart/form-data">
                                 <button type="submit" class="btn btn--edit" name="edit_btn" <?php echo 'value="'.$value['recipe_id'].'"'; ?> > <i class="bi bi-pencil-fill"></i> Editer  </button>
                             </form>
                         </div>
+                        <?php } ?>
                     </div>
                 <?php } 
                 } ?>   
@@ -171,7 +173,7 @@ include "includes/function_this_recipe.php";
 
 <?php include "includes/footer.php" ?>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-<script src="http://localhost/TD_RECIPES/js/index.js"></script>
+<script src="/js/index.js"></script>
 </body>
 </html>
 

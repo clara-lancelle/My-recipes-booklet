@@ -62,22 +62,42 @@ function ttt_form(array $array, $file) {
 
 	if(!empty($data_pic['picture']['name'])){
 
+		$tmpName = $data_pic['picture']['tmp_name'];
 		$name = $data_pic['picture']['name'];
 		$size = $data_pic['picture']['size'];
 		$error = $data_pic['picture']['error'];
+
 		$tabExtension = explode('.', $name);
 		$extension = strtolower(end($tabExtension));
-		$uniqueName = uniqid('', true);
+		$extensions = ['jpg', 'png', 'jpeg', 'gif', 'webp'];
+		$maxSize = 21000000;
 		
-		$extensions = ['jpg', 'png', 'jpeg', 'gif', 'webp',];
-		$maxSize = 400000;
 
-		if(!in_array($extension, $extensions) && $size > $maxSize && $error > 0){
+		if(!in_array($extension, $extensions)){
 			$status = STATUS_ERROR;
-			$errors['invalid']=' Votre fichier n\'est pas valide,'.'</br>'. 'il doit être au format : jpg, png, jpeg ou gif.';
-			
-	
+			$errors['img']['ext'] = 'le format de votre image doit être : jpg, png, jpeg ou gif.';
 		}
+
+		if($size > $maxSize){
+			$status = STATUS_ERROR;
+			$errors['img']['size'] = 'la taille de votre image ne doit pas dépasser 2mo.';
+		}
+				
+		if($error !== 0){
+			$status = STATUS_ERROR;
+			$errors['img']['else'] = 'votre image n\'a pas pu être chargée, veuillez réessayer ou changer d\'image.';
+			$phpFileUploadErrors = array(
+				0 => 'There is no error, the file uploaded with success',
+				1 => 'la taille de votre image ne doit pas dépasser 2mo',
+				2 => 'la taille de votre image ne doit pas dépasser 2mo',
+				3 => 'The uploaded file was only partially uploaded',
+				4 => 'No file was uploaded',
+				6 => 'Missing a temporary folder',
+				7 => 'Failed to write file to disk.',
+				8 => 'A PHP extension stopped the file upload.',
+			);
+		}
+
 	}
 
 //valid_title	
@@ -100,6 +120,20 @@ function ttt_form(array $array, $file) {
 	}
 
 //valid_value
+
+	if (!empty($data['cat'])&&(($data['cat']!=='Entrées')XOR($data['cat']!=='Plats')XOR($data['cat']!=='Desserts')XOR($data['cat']!=='Amuses bouches')XOR($data['cat']!=='Accompagnements')XOR($data['cat']!=='Sauces')XOR($data['cat']!=='Boissons'))) {
+
+			
+		$status = STATUS_ERROR;
+		$errors['select_cat'] = 'Valeur non-autorisée';
+
+	}
+
+	if(!is_numeric($data['guest'])||(!is_numeric($data['time']))){
+        $status = STATUS_ERROR;
+	    $errors['num'] = 'Valeur non-autorisée';
+        
+    }
 
 	if (!empty($data['level'])&&(($data['level']!=='faible')XOR($data['level']!=='moyen')XOR($data['level']!=='élevé'))) {
 
@@ -156,12 +190,15 @@ function getRecipe($array, $array_file, $id){
 	$ing7 = $data['ing7'];
 	$ing8 = $data['ing8'];
 	$ing9 = $data['ing9'];
-	$step1 = $data['step1'];
-	$step2 = $data['step2'];
-	$step3 = $data['step3'];
-	$step4 = $data['step4'];
-	$step5 = $data['step5'];
+
+	
+	$step1 = nl2br(trim($data['step1']));
+        if(!empty($data['step2'])){$step2 = nl2br(trim($data['step2']));}
+        if(!empty($data['step3'])){$step3 = nl2br(trim($data['step3']));}
+        if(!empty($data['step4'])){$step4 = nl2br(trim($data['step4']));}
+        if(!empty($data['step5'])){$step5 = nl2br(trim($data['step5']));}
 	$int_id = intval($id);
+
 
 	try {
 		$dbco = getConnexion();
@@ -272,7 +309,7 @@ function getRecipe($array, $array_file, $id){
 
 						$sth->execute();
 
-						move_uploaded_file($tmpName,'C:\wamp64\www\TD_RECIPES/Pictures/'.$file);
+						move_uploaded_file($tmpName,'Pictures/'.$file);
 
 				$dbco->commit();
 
@@ -281,6 +318,7 @@ function getRecipe($array, $array_file, $id){
 		}catch(PDOException $e) {
 			$status = STATUS_ERROR;
 			$dbco->rollBack();
+			print $e->getMessage ();
 			$errors['else'] = 'une erreur s\'est produite';
 		}
 	

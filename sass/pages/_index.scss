@@ -1,9 +1,14 @@
 
 
 main.index{
-    background-image: url("includes/img/bg_index.jpg");
+    background-image: url("includes/img/bg_index.png");
     background-size: cover;
     text-align: center;
+    background-position-y: -200px;
+
+    @include x_smallScreen{
+        background-position-y: inherit;
+    }
 }
 section.bloc--index{
     margin: 160px 20px;

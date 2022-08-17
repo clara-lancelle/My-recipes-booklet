@@ -1,13 +1,13 @@
 .navbar{
     justify-content: center;
-    background-color:rgba(255,154,86,0.9);
+    background-color: rgb(209 88 7 / 90%);
     width: -webkit-fill-available;
+    width: -moz-available;
     top: 0px;
     z-index: 1;
     position: fixed;
     display: grid;
     grid-template-rows: 1fr;
-    padding: 5px;
     grid-column-gap: 5px;
 
     @include smallScreen{
@@ -27,6 +27,16 @@
                 width: 50px;
                 padding:0px;
             }
+
+            @include xx_smallScreen{
+                width: 40px;
+                
+            }
+
+            @include xxx_smallScreen{
+                width: 30px;
+                
+            }
         }
     }  
 
@@ -35,13 +45,24 @@
         grid-row: 1;
         align-self: center;
         margin-right: 30px;
+        @include xx_smallScreen{
+            margin: 0;
+        }
 
         h1{
             font-size: 25px;
             font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            color: white;
 
             @include x_smallScreen{
                 font-size: 22px;
+            }
+            @include xx_smallScreen{
+                font-size: 18px;
+            }
+            @include xxx_smallScreen{
+                font-size: 16px;
+                
             }
         }
         
@@ -110,70 +131,123 @@
         padding: 2px;
         z-index: 99;
             @include x_smallScreen{
-                width: 40px;
+                width: 45px;
             }
-      }
-      
-      #menu-button.active{
-        background: rgb(250, 185, 111);
-        color: #fff;
-      }
-      #line-1,#line-2,#line-3{
+
+            @include xx_smallScreen{
+                width: 30px;
+                height: 31px;
+            }
+            @include xxx_smallScreen{
+                width: 30px;
+                height: auto;
+            }
+    }
+    
+    #menu-button.active{
+    background: rgb(250, 185, 111);
+    color: #fff;
+    }
+    #line-1,#line-3{
+    background: rgb(254, 255, 255);
+    width: 30px;
+    height: 6px;
+    margin: 6px auto;
+    border-radius: 2px;
+    transition: all linear 0.3s;
+        @include x_smallScreen{
+            width: 20px;
+        }
+        @include xx_smallScreen{
+            width: 15px;
+            height: 3px;
+        }
+    }
+
+    #line-2{
         background: rgb(254, 255, 255);
         width: 30px;
         height: 6px;
         margin: 6px auto;
         border-radius: 2px;
         transition: all linear 0.3s;
-            @include x_smallScreen{
-                width: 20px;
-            }
-       
-      }
-      
-      #line-1.active{
-      -webkit-transform: translate(0px,12px) rotate(45deg);
-      transform: translate(0px,12px) rotate(45deg);
-      }
-      
-      #line-2.active{
-      opacity: 0;
-      }
-      
-      #line-3.active{
-      -webkit-transform: translate(0px, -12px) rotate(-45deg);
-      transform: translate(0px, -12px) rotate(-45deg);
-      }
-      
-      #menu{
-        padding: 10px;
-        padding-top: 30px;
-        font-family: arial;
-        font-size: 1.5rem;
-        display: none;
-        position: absolute;
-        top: 60px;
-        border-radius: 5px;
-        background: inherit;
-        width: inherit;
+        @include x_smallScreen{
+            width: 20px;
+        }
+        @include xx_smallScreen{
+            width: 15px;
+            height: 3px;
+        }
 
-        ul{
-            list-style: none;
-            justify-items: start;
-
-            li{
-                margin: 8px 0;
-
-                a{
-                    color: rgb(255, 255, 255);
-                }
-              }
-          }
-      }
-      
+        @include xxx_smallScreen{
+            display: none;
+        }
+    }
     
-    }  
- 
+    #line-1.active{
+    -webkit-transform: translate(0px,12px) rotate(45deg);
+    transform: translate(0px,12px) rotate(45deg);
+        @include xx_smallScreen{
+            transform: translate(0px,9px) rotate(45deg);
+        }
+        @include xxx_smallScreen{
+            transform: translate(0px,5px) rotate(45deg);
+        }
+    }
+    
+    #line-2.active{
+    opacity: 0;
+    
+    }
+    
+    #line-3.active{
+    -webkit-transform: translate(0px, -12px) rotate(-45deg);
+    transform: translate(0px, -12px) rotate(-45deg);
+        @include xx_smallScreen{
+            transform: translate(0px,-9px) rotate(-45deg);
+        }
+        @include xxx_smallScreen{
+            transform: translate(0px,-5px) rotate(-45deg);
+        }
+    }
+    
+    #menu{
+    padding: 10px;
+    padding-top: 30px;
+    font-family: arial;
+    font-size: 20px;
+    display: none;
+    position: absolute;
+    top: 60px;
+    border-radius: 5px;
+    background: inherit;
+    width: inherit;
+    @include xx_smallScreen{
+        padding-top: 0;
+        font-size: 16px;
+        top: 50px;
+    }
+    @include xxx_smallScreen{
+        top: 40px;
+    }
+
+    ul{
+        list-style: none;
+        justify-items: start;
+
+        li{
+            margin: 8px 0;
+
+            a{
+                color: rgb(255, 255, 255);
+            }
+            }
+        }
+    }
+    
+
+}  
+
 // footer
 
 footer{

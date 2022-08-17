@@ -15,7 +15,13 @@ if(isset($_GET['page']) && !empty($_GET['page'])){
 
 include "includes/function_my_recipes.php"; 
     $user_id = $_SESSION['id'];
-    $return = getRecipes($user_id, $current_page_nb); 
+    if(isset($_POST['filter'])){
+        $filter = $_POST['filter'];
+    }else{
+        $filter_tab['0']['empty'] = 'none';
+        $filter = $filter_tab['0'];
+    }
+    $return = getRecipes($user_id, $current_page_nb, $filter); 
 
     if(!isset($return['error'])){
         $pages = $return['pages_nb'];
@@ -30,8 +36,8 @@ include "includes/function_my_recipes.php";
   <!-- Required meta tags -->
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">   
-  <link rel="icon" href="http://localhost/TD_RECIPES/includes/img/favicon.png" type="image/png">
-  <Link href="http://localhost/TD_RECIPES/style.css" rel="stylesheet" type="text/css" />
+  <link rel="icon" href="/includes/img/favicon.png" type="image/png">
+  <Link href="/style.css" rel="stylesheet" type="text/css" />
   
   <title>Mes recettes - Mes recettes</title>
  
@@ -43,35 +49,45 @@ include "includes/function_my_recipes.php";
         <?php include "includes/navbar.php" ?>
     </header>
 
-    <main>
+    <main class="bloc bg_card_my">
 
-        <section class="bloc bg_card_my">
+        <section class="bloc">
             <h2 class="bloc__title bloc__title--bg">Mes recettes</h2>
-            <div <?php echo isset($return['error']) ? 'class="bloc__body error--grid"' : 'class="bloc__body--card"' ?> > 
+            <div class="bloc__body--card"> 
             
                 <?php 
                 if(isset($return['error'])){  
                     foreach($return['error'] as $errors => $error){ 
-
                     echo 
                     '<div class="return_error error--grid text-center">
                         <h4>'.$error.'</h4>
                     </div>';
                     }
-                }else{
-                    $i = 0;
+                }
+                    ?>
+                <form id="filterTable" name="filter" method="POST" action="#">
+                    <button type="submit" class="btn filter_button" name="filter['entree']" value="1">Entrées</button>
+                    <button type="submit" class="btn filter_button" name="filter['plat']" value="2">Plats</button>
+                    <button type="submit" class="btn filter_button" name="filter['dessert']" value="3">Desserts</button>
+                    <button type="submit" class="btn filter_button" name="filter['amuse']"value="4">Amuses bouches</button>
+                    <button type="submit" class="btn filter_button" name="filter['accompagnement']"value="5">Accompagnements</button>
+                    <button type="submit" class="btn filter_button" name="filter['sauce']"value="6">Sauces</button>
+                    <button type="submit" class="btn filter_button" name="filter['boisson']"value="7" >Boissons</button>
+                </form>
 
+                <?php
+                if(!isset($return['error'])){ 
+                    $i = 0;
                     foreach($recipes as $array => $recipe){
 
                     ?>
                     <div class="card">
                         <div class="card__header">
                             <?php 
-                            echo '<img src="http://localhost/TD_RECIPES/Pictures/'.$recipe['name'].'" 
+                            echo '<img src="/Pictures/'.$recipe['name'].'" 
                                 class="card__img" alt="votre image" >';
                             ?> 
                         </div>
-                        <div class="section-divider"></div>
 
                         <div class="card__body b0">
                             <?php
@@ -85,7 +101,7 @@ include "includes/function_my_recipes.php";
                         
                             <div id="<?php echo 'drop-collapse'.$i;?>" class="bloc__collapse">
                             <div class="card__button"> 
-                                    <form class="noPad" action="http://localhost/TD_RECIPES/recipe_extension.php" method="get" enctype="multipart/form-data">
+                                    <form class="noPad" action="/recipe_extension.php" method="get" enctype="multipart/form-data">
                                         <button type="submit" class="btn btn--extend btn--extend--my" name="extend_btn" <?php echo 'value="'.$recipe['recipe_id'].'"'; ?> > <i class="bi bi-box-arrow-up-right"></i> </button>
                                     </form>
                             </div>
@@ -145,7 +161,7 @@ include "includes/function_my_recipes.php";
                                         </li>
                                     </ul>  
                                 <div class="card__button"> 
-                                    <form class="noPad" action="http://localhost/TD_RECIPES/edit_recipes.php" method="get" enctype="multipart/form-data">
+                                    <form class="noPad" action="/edit_recipes.php" method="get" enctype="multipart/form-data">
                                         <button type="submit" class="btn btn--edit btn--edit--my" name="edit_btn" <?php echo 'value="'.$recipe['recipe_id'].'"'; ?> > <i class="bi bi-pencil-fill"></i> Editer  </button>
                                     </form>
                                 </div>
@@ -153,10 +169,10 @@ include "includes/function_my_recipes.php";
                             </div>
                         </div>
                     </div>
+                <?php } ?>
             <?php } ?>
-        <?php } ?>   
         </div>
-        <?php if(!isset($return['error'])){ ?>
+        <?php if(!isset($return['error'])&& ($pages > 1)){ ?>
         <ul class="pagination">
                 <!-- Lien vers la page précédente (désactivé si on se trouve sur la 1ère page) -->
                 <li class="page-item <?= ($current_page_nb <= 1) ? "disabled" : "" ?>">
@@ -187,6 +203,6 @@ include "includes/function_my_recipes.php";
 
 <?php include "includes/footer.php" ?>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-<script src="http://localhost/TD_RECIPES/js/index.js"></script>
+<script src="/js/index.js"></script>
 </body>
 </html>

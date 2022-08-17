@@ -15,11 +15,20 @@ if(isset($_GET['page']) && !empty($_GET['page'])){
 }
     include "includes/function_all_recipes.php"; 
     $user_id = $_SESSION['id'];
-    $return = get_all_recipes($current_page_nb); 
 
+    if(isset($_POST['filter'])){
+        $filter = $_POST['filter'];
+    }else{
+        $filter_tab['0']['empty'] = 'none';
+        $filter = $filter_tab['0'];
+    }
+
+
+    $return = get_all_recipes($current_page_nb, $filter);
     $pages = $return['pages_nb'];
     $first_recipe = $return['first'];
     $recipes = $return['recipes'];
+   
 
 ?>
 
@@ -29,8 +38,8 @@ if(isset($_GET['page']) && !empty($_GET['page'])){
   <!-- Required meta tags -->
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" href="http://localhost/TD_RECIPES/includes/img/favicon.png" type="image/png">
-  <Link href="http://localhost/TD_RECIPES/style.css" rel="stylesheet" type="text/css" />
+  <link rel="icon" href="/includes/img/favicon.png" type="image/png">
+  <Link href="/style.css" rel="stylesheet" type="text/css" />
   <title>Mes recettes - Toutes les recettes</title>
 
 </head>
@@ -41,10 +50,21 @@ if(isset($_GET['page']) && !empty($_GET['page'])){
         <?php include "includes/navbar.php" ?>
     </header>
 
-    <main>
-        <section class="bloc bg_card">
+    <main class="bloc bg_card" >
+        <section class="bloc">
             <h2 class="bloc__title bloc__title--bg">Toutes les recettes</h2>
             <div class="bloc__body--card">
+                <form id="filterTable" name="filter" method="POST" action="#">
+                    <button type="submit" class="btn filter_button" name="filter['entree']" value="1">Entrées</button>
+                    <button type="submit" class="btn filter_button" name="filter['plat']" value="2">Plats</button>
+                    <button type="submit" class="btn filter_button" name="filter['dessert']" value="3">Desserts</button>
+                    <button type="submit" class="btn filter_button" name="filter['amuse']"value="4">Amuses bouches</button>
+                    <button type="submit" class="btn filter_button" name="filter['accompagnement']"value="5">Accompagnements</button>
+                    <button type="submit" class="btn filter_button" name="filter['sauce']"value="6">Sauces</button>
+                    <button type="submit" class="btn filter_button" name="filter['boisson']"value="7" >Boissons</button>
+                </form>
+
+
                 <?php
                 $i = 0;
                 foreach($recipes as $recipe => $array){?>
@@ -52,7 +72,7 @@ if(isset($_GET['page']) && !empty($_GET['page'])){
                     <div class="card">
                         <div class="card__header">
                             <?php
-                                echo '<img src="http://localhost/TD_RECIPES/Pictures/'.$array['name'].'"  alt="image">';                  
+                                echo '<img src="/Pictures/'.$array['name'].'"  alt="image">';                  
                             ?>
                         </div>
                         <div class="card__body b0">
@@ -68,7 +88,7 @@ if(isset($_GET['page']) && !empty($_GET['page'])){
     
                             <div class="bloc__collapse">
                             <div class="card__button"> 
-                                <form class="noPad" action="http://localhost/TD_RECIPES/recipe_extension.php" method="get" enctype="multipart/form-data">
+                                <form class="noPad" action="/recipe_extension.php" method="get" enctype="multipart/form-data">
                                     <button type="submit" class="btn btn--extend" name="extend_btn" <?php echo 'value="'.$array['recipe_id'].'"'; ?> > <i class="bi bi-box-arrow-up-right"></i> </button>
                                 </form>
                             </div>
@@ -132,7 +152,7 @@ if(isset($_GET['page']) && !empty($_GET['page'])){
 
                                 if($user_id == $array['author_id']){?>
                                 <div class="card__button"> 
-                                    <form class="noPad" action="http://localhost/TD_RECIPES/edit_recipes.php" method="get" enctype="multipart/form-data" >
+                                    <form class="noPad" action="/edit_recipes.php" method="get" enctype="multipart/form-data" >
                                         <button class="btn btn--edit " type="submit" name="edit_btn" <?php echo 'value="'.$array['recipe_id'].'"'; ?>><i class="bi bi-pencil-fill"></i> Editer</button>
                                     </form>
                                 </div>
@@ -144,7 +164,7 @@ if(isset($_GET['page']) && !empty($_GET['page'])){
                     </div>
                 <?php } ?>
             </div>
-
+            <?php if(isset($pages)&& $pages > 1){ ?>
             <ul class="pagination">
                 <!-- Lien vers la page précédente (désactivé si on se trouve sur la 1ère page) -->
                 <li class="page-item <?= ($current_page_nb <= 1) ? "disabled" : "" ?>">
@@ -175,11 +195,12 @@ if(isset($_GET['page']) && !empty($_GET['page'])){
                     </a>
                 </li>
             </ul>
+            <?php }?>
 
         </section>
     </main>
 <?php include "includes/footer.php" ?>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-<script src="http://localhost/TD_RECIPES/js/index.js"></script>
+<script src="/js/index.js"></script>
 </body>
  </html>

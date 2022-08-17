@@ -1,7 +1,13 @@
 *{
     font-family: sans-serif;
     font-size: 18px;
+
+    @include xx_smallScreen{
+        font-size: 16px;
+    }
 }
+
+
 
 html{
     height: 100%;
@@ -15,10 +21,10 @@ body{
 
 
 main{
-    max-width: 1400px;
+    max-width: 1300px;
     margin: auto;
     padding-bottom: 12px;
-    margin-top: 78px;
+    margin-top: 69px;
     min-height: 1000px;
 
     @include smallScreen{
@@ -36,17 +42,22 @@ main{
             margin-top: 60px;
         }
     }
+    &.grey{
+        background: rgb(217 217 217 / 24%);
+    }
+    &.smaller{
+        min-height: calc(100vh - 141px);
+        @include smallScreen{
+            min-height: calc(100vh - 128px);
+        }
+        @include x_smallScreen{
+            min-height: calc(100vh - 118px);
+        }
+    }
+    
+
 }
 
-main.smaller{
-    min-height: calc(100vh - 150px);
-    @include smallScreen{
-        min-height: calc(100vh - 138px);
-    }
-    @include x_smallScreen{
-        min-height: calc(100vh - 135px);
-    }
-}
 
 
 //// Ban
@@ -66,10 +77,13 @@ section.ban{
 
 section.bloc{
     box-sizing: border-box;
-    padding: 20px 0 ;
+    text-align: center;
 
     &--pad{
         padding: 50px;
+        @include xx_smallScreen{
+            padding: 20px;
+        }
     }
 
 } 
@@ -79,9 +93,15 @@ section.bloc{
     grid-template-columns: repeat(2,1fr);
     place-items: center;
     row-gap: 30px;
+    margin: 1% 5%;
+    padding: 2%;
+    background: #f9f9f98f;
     
-    @include x_smallScreen{
+    @include s_smallScreen{
         grid-template-columns: 1fr;
+        margin: 2%;
+        padding: 1%;
+        margin: 1%;
     }
 }
 
@@ -126,14 +146,28 @@ section.bloc--smallMargin{
 }
 
 
+.bloc__row{
+    align-items: center;
+    display: grid;
+    grid-auto-flow: column;
+
+    @include smallScreen{
+        grid-auto-flow: row;
+    }
+}
+
 //// bloc title
 
 
 h2.bloc__title{
     text-align:center;
-    font-size: 2.5rem;
+    font-size: 40px;
     color: $dark_grey;
-    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    display: inline-grid;
+    padding: 35px;
+    margin: 20px;
+    position: inherit;
 
     &--pad{
         padding: 4% 0%;
@@ -145,6 +179,9 @@ h2.bloc__title{
 
     @include x_smallScreen{
         font-size: 25px;
+        padding: 25px;
+         margin: 5px;
+
     }
     
 }
@@ -152,12 +189,13 @@ h2.bloc__title{
 //// header title
 
 h3.header__title{
-    font-size:40px;
-    letter-spacing: 4px;
+    font-size:30px;
+    letter-spacing: 1px;
     color: $dark_grey;
     background-color: rgba(236, 161, 75, 0.274);
     padding: 4px 14px;
     margin-bottom: 40px;
+    font-weight: 300;
     @include x_smallScreen{
         font-size: 20px;
         margin-bottom: 20px;
@@ -170,6 +208,14 @@ h4{
     font-size: 25px;
     display: block;
     height: 50px;
+    font-weight: 200;
+
+    &.filter_name{
+        grid-row: 1;
+        grid-column: 1/3;
+        color: $dark_grey;
+    }
+
     @include smallScreen{
         font-size: 20px;
     }
@@ -206,16 +252,17 @@ h5.subtitle{
 
 
 h6{
-    font-size: 20px;
+    font-size: 25px;
     font-weight: lighter;
     margin: 2% 0%;
     @include x_smallScreen{
-        font-size: 16px;
+        font-size: 17px;
      }
 
     &.ing__title{
         text-align: center;
         margin: 30px;
+        font-size: 20px;
     }
 }
 
@@ -258,8 +305,23 @@ p.return{
 //// card
 
 
+.card_group{
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-items: center;
+    
+    @include smallScreen{
+       
+        grid-auto-flow: row;
+        grid-template-columns: 1fr;
+        place-items: center;
+        grid-row-gap: 5px;
+    }
+}
+
 .card{
-    width: 600px;
+    width: 80%;
     text-align: -webkit-center;
     border: solid grey;
     background-color: white;
@@ -267,6 +329,7 @@ p.return{
 
     @include smallScreen{
         width: 85%;
+        grid-column: 1;
     }
 
     &--orange{
@@ -275,20 +338,29 @@ p.return{
         border-radius: 10px;
     }
 
+    &--small{
+        
+        @include smallScreen{
+            width: 70%;
+        }
+    }
+
     &__header{
-        height: 350px;
+        height: 300px;
         display: flex;
         align-items: center;
         justify-content: center;
+        background: #dbb08c1f;
 
         @include smallScreen{
             height: 200px;
         }
 
-        img{
-            height: 300px;
-            margin-top: 10px;
 
+        img{
+            max-height: 90%;
+            max-width: 90%;
+        
             &:hover{
                 transform: scale(1.05);
                 @include smallScreen{
@@ -297,21 +369,49 @@ p.return{
             }
 
             @include smallScreen{
-                height: 90%;
+                max-height: 90%;
                 width: auto;
+                max-width: 90%;
             }
         }
     }
 
     &__body{
-        height: 500px;
+        height: 450px;
+        
+        &--small{
+            height: 100px;
+            margin-top: 20px;
+            border-top: solid 1px;
+            @include smallScreen{
+                height: auto;
+                margin-top: 0;
+            }
+        }
 
+        &--h400{
+            height: 400px;
+            @include smallScreen{
+                height: auto;
+                margin-top: 0;
+            }
+        }
         .card__button{
             margin-bottom: 10px;
 
             @include smallScreen{
-                padding: 10px;
+                padding: 20px;
+                margin-bottom: 0px;
             }
+        }
+
+        .bloc__collapse{
+
+            @include x_smallScreen{
+                border-top: solid 2px;
+                margin-top: 10px;
+            }
+            
         }
 
         @include x_smallScreen{
@@ -359,6 +459,10 @@ p.return{
     width: auto!important;
 }
 
+.divider{
+    border-top: solid 5px #ff8c0094;
+    margin: 50px 0;
+}
 
 //// a
 
@@ -439,11 +543,13 @@ form{
 
     &.noPad{
         padding: 0;
+        width: auto;
     }
 
     &.form--bg{
         background-color: rgba(255, 255, 255, 0.8);
     }
+
 
 
     @include smallScreen{
@@ -499,14 +605,20 @@ label{
 
 
 input{
-    height: 40px;
+    height: 30px;
     border-radius: 5px;
     width: -webkit-fill-available;
+    width: -moz-available;
     text-align: center;
+    border: solid 1px $dark_grey;
     @include smallScreen{
        height: 25px;
        font-size: 16px;
        text-align-last: center;
+    }
+
+    &:focus{
+        border: solid 2px $grey;
     }
 
     &.form-control{
@@ -517,6 +629,8 @@ input{
             margin: 15px 0;
             font-size: 15px;
         }
+
+        
     }
     &.form-input--small{
         width: 100px;
@@ -542,7 +656,7 @@ input{
 }
 
 .field__ing{
-    padding: 40px;
+    padding: 30px;
     text-align: -webkit-center;
     margin: 20px 0 auto;
     padding: 20px 0;
@@ -564,7 +678,7 @@ legend{
 }
 
 select{
-    height: 40px;
+    height: 30px;
     border-radius: 5px;
 }
 
@@ -572,6 +686,7 @@ select{
 textarea{
     border-radius: 5px;
     width: -webkit-fill-available;
+    width: -moz-available;
     align-self: center;
     height: -webkit-fill-available;
     font-size: 18px;
