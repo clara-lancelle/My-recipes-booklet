@@ -63,11 +63,8 @@ function ttt_form(array $array, array $file)
 
 	//si nouvelle img envoyée -->
 
-<<<<<<< HEAD
 	if (!empty($data_pic['picture']['name'])) {
 
-=======
->>>>>>> 2b5d20c52d37e0d3f44100c1119faf8f34087355
 		$tmpName = $data_pic['picture']['tmp_name'];
 		$name = $data_pic['picture']['name'];
 		$size = $data_pic['picture']['size'];
@@ -76,7 +73,6 @@ function ttt_form(array $array, array $file)
 		$tabExtension = explode('.', $name);
 		$extension = strtolower(end($tabExtension));
 		$extensions = ['jpg', 'png', 'jpeg', 'gif', 'webp'];
-<<<<<<< HEAD
 		$maxSize = 2000000;
 
 		if (!in_array($extension, $extensions)) {
@@ -104,36 +100,7 @@ function ttt_form(array $array, array $file)
 				7 => 'Failed to write file to disk.',
 				8 => 'A PHP extension stopped the file upload.',
 			);
-=======
-		$maxSize = 21000000;
-		
-
-		if(!in_array($extension, $extensions)){
-			$status = STATUS_ERROR;
-			$errors['img']['ext'] = 'le format de votre image doit être : jpg, png, jpeg ou gif.';
->>>>>>> 2b5d20c52d37e0d3f44100c1119faf8f34087355
 		}
-
-		if($size > $maxSize){
-			$status = STATUS_ERROR;
-			$errors['img']['size'] = 'la taille de votre image ne doit pas dépasser 2mo.';
-		}
-				
-		if($error !== 0){
-			$status = STATUS_ERROR;
-			$errors['img']['else'] = 'votre image n\'a pas pu être chargée, veuillez réessayer ou changer d\'image.';
-			$phpFileUploadErrors = array(
-				0 => 'There is no error, the file uploaded with success',
-				1 => 'la taille de votre image ne doit pas dépasser 2mo',
-				2 => 'la taille de votre image ne doit pas dépasser 2mo',
-				3 => 'The uploaded file was only partially uploaded',
-				4 => 'No file was uploaded',
-				6 => 'Missing a temporary folder',
-				7 => 'Failed to write file to disk.',
-				8 => 'A PHP extension stopped the file upload.',
-			);
-		}
-
 	}
 
 	//si error mais nouvelle image valide -->
@@ -176,29 +143,11 @@ function ttt_form(array $array, array $file)
 
 	//valid_value
 
-<<<<<<< HEAD
 	if (!empty($data['cat']) && (($data['cat'] !== 'Entrées') xor ($data['cat'] !== 'Plats') xor ($data['cat'] !== 'Desserts') xor ($data['cat'] !== 'Amuses bouches') xor ($data['cat'] !== 'Accompagnements') xor ($data['cat'] !== 'Sauces') xor ($data['cat'] !== 'Boissons'))) {
 
 
 		$status = STATUS_ERROR;
 		$errors['select_cat'] = 'Valeur non-autorisée';
-=======
-	if (!empty($data['cat'])&&(($data['cat']!=='Entrées')XOR($data['cat']!=='Plats')XOR($data['cat']!=='Desserts')XOR($data['cat']!=='Amuses bouches')XOR($data['cat']!=='Accompagnements')XOR($data['cat']!=='Sauces')XOR($data['cat']!=='Boissons'))) {
-
-			
-		$status = STATUS_ERROR;
-		$errors['select_cat'] = 'Valeur non-autorisée';
-
-	}
-
-	if(!is_numeric($data['guest'])||(!is_numeric($data['time']))){
-        $status = STATUS_ERROR;
-	    $errors['num'] = 'Valeur non-autorisée';
-        
-    }
-
-	if (!empty($data['level'])&&(($data['level']!=='faible')XOR($data['level']!=='moyen')XOR($data['level']!=='élevé'))) {
->>>>>>> 2b5d20c52d37e0d3f44100c1119faf8f34087355
 
 	}
 
@@ -270,7 +219,6 @@ function getRecipe($array, $array_file, $id)
 	$ing7 = $data['ing7'];
 	$ing8 = $data['ing8'];
 	$ing9 = $data['ing9'];
-<<<<<<< HEAD
 	$date = date('Y-m-d H:i:s');
 
 	function nl_br($string)
@@ -294,15 +242,6 @@ function getRecipe($array, $array_file, $id)
 		$step5 = nl_br(trim($data['step5']));
 	}
 
-=======
-
-	
-	$step1 = nl2br(trim($data['step1']));
-        if(!empty($data['step2'])){$step2 = nl2br(trim($data['step2']));}
-        if(!empty($data['step3'])){$step3 = nl2br(trim($data['step3']));}
-        if(!empty($data['step4'])){$step4 = nl2br(trim($data['step4']));}
-        if(!empty($data['step5'])){$step5 = nl2br(trim($data['step5']));}
->>>>>>> 2b5d20c52d37e0d3f44100c1119faf8f34087355
 	$int_id = intval($id);
 
 
@@ -411,12 +350,8 @@ function getRecipe($array, $array_file, $id)
 					SET name= :name
 					WHERE recipe_id = :recipe_id");
 
-<<<<<<< HEAD
 				$sth->bindParam(':name', $new_file);
 				$sth->bindParam(':recipe_id', $recipe_id['recipe_id']);
-=======
-						move_uploaded_file($tmpName,'Pictures/'.$file);
->>>>>>> 2b5d20c52d37e0d3f44100c1119faf8f34087355
 
 				$sth->execute();
 				move_uploaded_file($tmpName, 'Pictures/' . $new_file);
@@ -447,16 +382,6 @@ function getRecipe($array, $array_file, $id)
 
 			$dbco->commit();
 
-<<<<<<< HEAD
-=======
-			} 
-		
-		}catch(PDOException $e) {
-			$status = STATUS_ERROR;
-			$dbco->rollBack();
-			print $e->getMessage ();
-			$errors['else'] = 'une erreur s\'est produite';
->>>>>>> 2b5d20c52d37e0d3f44100c1119faf8f34087355
 		}
 
 	} catch (PDOException $e) {

@@ -25,11 +25,7 @@ function getData($id){
 
         } else {
             $sth = $dbco->prepare("
-<<<<<<< HEAD
             SELECT recipe.*, picture.*, components.*, bloc_steps.*
-=======
-            SELECT recipe.*, picture.name, components.*, bloc_steps.*
->>>>>>> 2b5d20c52d37e0d3f44100c1119faf8f34087355
             FROM recipe
             INNER JOIN picture ON (picture.recipe_id = recipe.recipe_id and recipe.recipe_id = :recipe_id)
             INNER JOIN components ON (components.fk_recipe_id = recipe.recipe_id and recipe.recipe_id = :recipe_id)
@@ -66,17 +62,6 @@ function br2nl($string){
     return $nl;
 }
 
-
-function br2nl($string){
-    
-    $pattern = array("<br />","<br>","<br/>");  
-    $nl = str_ireplace($pattern, "\n", $string); 
-    
-    return $nl;
-}
-
-
-
 function getEdit($array,$array_file, $recipe_id){
 
 $data = $array ?? [];
@@ -90,11 +75,7 @@ $errors = [];
 //empty
 
     if(empty($data['title'])||empty($data['cat'])||empty($data['guest'])||empty($data['time'])
-<<<<<<< HEAD
     ||empty($data['level'])||empty($data['price'])||empty($data['ing1'])||empty($data['step1'])){
-=======
-    ||empty($data['level'])||empty($data['price'])||empty($data['ing1'])||empty($data['step1'])||empty($data_pic['picture']['name'])){
->>>>>>> 2b5d20c52d37e0d3f44100c1119faf8f34087355
 
         $status = STATUS_ERROR;
         $errors['empty'] = 'Merci de remplir tous les champs';
@@ -104,11 +85,7 @@ $errors = [];
 //valid_title	
 
 	function search($string){
-<<<<<<< HEAD
 		$pattern = '/[<\>\?]/';
-=======
-		$pattern = '/[^a-zA-ZÀ-ÖØ-öÿŸ\-\:\!\=\d\s]/';
->>>>>>> 2b5d20c52d37e0d3f44100c1119faf8f34087355
 
 		$a = preg_match($pattern,$string)?true:false;
 
@@ -127,7 +104,6 @@ $errors = [];
 
 //valid_value
 
-<<<<<<< HEAD
     if (!empty($data['cat'])&&(($data['cat']!=='Entrées')XOR($data['cat']!=='Plats')XOR($data['cat']!=='Desserts')
     XOR($data['cat']!=='Amuses bouches')
     XOR($data['cat']!=='Accompagnements')
@@ -135,11 +111,6 @@ $errors = [];
     XOR($data['cat']!=='Boissons')
     )) {
 
-=======
-    if (!empty($data['cat'])&&(($data['cat']!=='Entrées')XOR($data['cat']!=='Plats')XOR($data['cat']!=='Desserts')XOR($data['cat']!=='Amuses bouches')XOR($data['cat']!=='Accompagnements')XOR($data['cat']!=='Sauces')XOR($data['cat']!=='Boissons'))) {
-
-                
->>>>>>> 2b5d20c52d37e0d3f44100c1119faf8f34087355
         $status = STATUS_ERROR;
         $errors['select_cat'] = 'Valeur non-autorisée';
 
@@ -169,7 +140,6 @@ $errors = [];
 
 // valid_img
 
-<<<<<<< HEAD
 //si nouvelle img envoyée -->
     
     if(!empty($data_pic['picture']['name'])){
@@ -233,41 +203,6 @@ $errors = [];
 
     else{
         $status = STATUS_SUCCESS;
-=======
-    $tmpName = $data_pic['picture']['tmp_name'];
-    $name = $data_pic['picture']['name'];
-    $size = $data_pic['picture']['size'];
-    $error = $data_pic['picture']['error'];
-
-    $tabExtension = explode('.', $name);
-    $extension = strtolower(end($tabExtension));
-    $extensions = ['jpg', 'png', 'jpeg', 'gif', 'webp'];
-    $maxSize = 2100000;
-
-	if(!in_array($extension, $extensions)){
-        $status = STATUS_ERROR;
-        $errors['img']['ext'] = 'le format de votre image doit être : jpg, png, jpeg ou gif.';
-    }
-
-    if($size > $maxSize){
-        $status = STATUS_ERROR;
-        $errors['img']['size'] = 'la taille de votre image ne doit pas dépasser 2mo.';
-    }
-			
-    if($error !== 0){
-        $status = STATUS_ERROR;
-        $errors['img']['else'] = 'votre image n\'a pas pu être chargée, veuillez réessayer ou changer d\'image.';
-        $phpFileUploadErrors = array(
-            0 => 'There is no error, the file uploaded with success',
-            1 => 'la taille de votre image ne doit pas dépasser 2mo',
-            2 => 'la taille de votre image ne doit pas dépasser 2mo',
-            3 => 'The uploaded file was only partially uploaded',
-            4 => 'No file was uploaded',
-            6 => 'Missing a temporary folder',
-            7 => 'Failed to write file to disk.',
-            8 => 'A PHP extension stopped the file upload.',
-        );
->>>>>>> 2b5d20c52d37e0d3f44100c1119faf8f34087355
     }
 
 
@@ -291,7 +226,6 @@ $errors = [];
         $ing7 = $data['ing7'];
         $ing8 = $data['ing8'];
         $ing9 = $data['ing9'];
-<<<<<<< HEAD
         $date = date('Y-m-d H:i:s');
 
         function nl_br($string){
@@ -306,34 +240,13 @@ $errors = [];
         if(!empty($data['step3'])){$step3 = nl_br(trim($data['step3']));}
         if(!empty($data['step4'])){$step4 = nl_br(trim($data['step4']));}
         if(!empty($data['step5'])){$step5 = nl_br(trim($data['step5']));}
-=======
-
-
-        $step1 = nl2br(trim($data['step1']));
-        if(!empty($data['step2'])){$step2 = nl2br(trim($data['step2']));}
-        if(!empty($data['step3'])){$step3 = nl2br(trim($data['step3']));}
-        if(!empty($data['step4'])){$step4 = nl2br(trim($data['step4']));}
-        if(!empty($data['step5'])){$step5 = nl2br(trim($data['step5']));}
-
-        $tmpName = $data_pic['picture']['tmp_name'];
-        $name = $data_pic['picture']['name'];
-        $tabExtension = explode('.', $name);
-        $extension = strtolower(end($tabExtension));
-        $uniqueName = uniqid('', true);
-        $file = $uniqueName.".".$extension;
-
->>>>>>> 2b5d20c52d37e0d3f44100c1119faf8f34087355
 		
 		try{ 
 			$dbco = getConnexion();
 
             $sth = $dbco->prepare("
             UPDATE recipe
-<<<<<<< HEAD
             SET recipe_title =:title, guest_number= :guest,setup_time= :setup, level=:level, price=:price, type=:type, date_time=:date
-=======
-            SET recipe_title =:title, guest_number= :guest,setup_time= :setup, level=:level, price=:price, type=:type
->>>>>>> 2b5d20c52d37e0d3f44100c1119faf8f34087355
             WHERE recipe_id = :recipe_id");
 
                 $sth -> bindParam(':title', $title);
@@ -342,10 +255,7 @@ $errors = [];
                 $sth -> bindParam(':level', $level);
                 $sth -> bindParam(':price', $price);
                 $sth -> bindParam(':type', $cat);
-<<<<<<< HEAD
                 $sth -> bindParam(':date', $date);
-=======
->>>>>>> 2b5d20c52d37e0d3f44100c1119faf8f34087355
                 $sth -> bindParam(':recipe_id', $recipe_id);
                 
 
@@ -359,10 +269,6 @@ $errors = [];
                 WHERE fk_recipe_id = :recipe_id
                 ");
             
-<<<<<<< HEAD
-=======
-
->>>>>>> 2b5d20c52d37e0d3f44100c1119faf8f34087355
                     $sql -> bindParam(':step1', $step1);
                     $sql -> bindParam(':step2', $step2);
                     $sql -> bindParam(':step3', $step3);
@@ -371,10 +277,7 @@ $errors = [];
                     $sql -> bindParam(':recipe_id', $recipe_id);
 
                     $sql->execute();
-<<<<<<< HEAD
 
-=======
->>>>>>> 2b5d20c52d37e0d3f44100c1119faf8f34087355
                 //components
 
 				$sql = $dbco->prepare("
@@ -411,7 +314,6 @@ $errors = [];
 
         //picture//
 
-<<<<<<< HEAD
 // si image envoyée non changée -->
         if(empty($data_pic['picture']['name'])&& !empty($data['picToEdit'])&& $data['picToEdit']!== 'false'){
 
@@ -424,24 +326,11 @@ $errors = [];
                     
                     $sth -> bindParam(':name', $new_file);
                     $sth -> bindParam(':recipe_id', $recipe_id);
-=======
-                $sth = $dbco->prepare("
-                    UPDATE picture
-                    SET name= :name
-                    WHERE recipe_id = :recipe_id");
-                    
-                    $sth -> bindParam(':name', $file);
-                    $sth -> bindParam(':recipe_id', $recipe_id);
-
-                    $sth->execute();
-                    move_uploaded_file($tmpName, 'Pictures/'.$file);
->>>>>>> 2b5d20c52d37e0d3f44100c1119faf8f34087355
 
                     $sth->execute();
                     move_uploaded_file($tmpName, 'Pictures/'.$new_file);
                     unlink($tmpName);
 
-<<<<<<< HEAD
         }
                    
 // si une nouvelle image est envoyée -->
@@ -466,8 +355,6 @@ $errors = [];
         }
 // si aucune nouvelle image --> ne fais rien
                     
-=======
->>>>>>> 2b5d20c52d37e0d3f44100c1119faf8f34087355
 		}catch(PDOException $e){
 			$status = STATUS_ERROR;
             print $e->getMessage ();

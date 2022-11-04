@@ -22,27 +22,20 @@ You will see your recipes on your personnal page where you can also modify them.
 
 * On the Github page, you have to copy the link of the repository.
 
-* Open the command terminal on the folder you want the repository to be add.
+* open the command terminal on the folder you want the repository to be add.
 
-* Write : git clone *link*
+* write : git clone *link*
 
 ##### it's done !
 
 ### Without Git Bash : 
 
-* Click on the green code button on the repository page
+* click on the green code button on the repository page
 
-* Select : Download ZIP 
+* select : Download ZIP 
 
 * When the folder is download click right : Extract All 
 
 ##### it's done !
-
-
-## How to deploy :
-
-* You'll have to set your own path in the file 'configuration.php'
-
-* and update the data_base.php file to put your own phpMyAdmin database.
 
 

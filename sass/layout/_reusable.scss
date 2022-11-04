@@ -1,25 +1,14 @@
 *{
     font-family: sans-serif;
-<<<<<<< HEAD
     font-size: 1em;
 
     @include xx_smallScreen{
         font-size: 0.9em;
-=======
-    font-size: 18px;
-
-    @include xx_smallScreen{
-        font-size: 16px;
->>>>>>> 2b5d20c52d37e0d3f44100c1119faf8f34087355
     }
 }
 
 
-<<<<<<< HEAD
  
-=======
-
->>>>>>> 2b5d20c52d37e0d3f44100c1119faf8f34087355
 html{
     height: 100%;
 }
@@ -162,17 +151,11 @@ section.bloc--smallMargin{
     align-items: center;
     display: grid;
     grid-auto-flow: column;
-<<<<<<< HEAD
     grid-template-columns: 1fr 1fr;
 
     @include x_smallScreen{
         grid-auto-flow: row;
         grid-template-columns: 1fr;;
-=======
-
-    @include smallScreen{
-        grid-auto-flow: row;
->>>>>>> 2b5d20c52d37e0d3f44100c1119faf8f34087355
     }
 }
 
@@ -181,20 +164,11 @@ section.bloc--smallMargin{
 
 .bloc__title{
     text-align:center;
-<<<<<<< HEAD
     font-size: 1.8em;
     color: $dark_grey;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     display: inline-grid;
     margin: 1.6em;
-=======
-    font-size: 40px;
-    color: $dark_grey;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    display: inline-grid;
-    padding: 35px;
-    margin: 20px;
->>>>>>> 2b5d20c52d37e0d3f44100c1119faf8f34087355
     position: inherit;
 
     &--pad{
@@ -206,14 +180,8 @@ section.bloc--smallMargin{
     }
 
     @include x_smallScreen{
-<<<<<<< HEAD
         font-size: 1.6em;
          margin: 1.3em;
-=======
-        font-size: 25px;
-        padding: 25px;
-         margin: 5px;
->>>>>>> 2b5d20c52d37e0d3f44100c1119faf8f34087355
 
     }
     
@@ -221,15 +189,10 @@ section.bloc--smallMargin{
 
 //// header title
 
-<<<<<<< HEAD
 .header__title{
     font-style: italic;
     font-weight: 100;
     font-size: 1.1em;
-=======
-h3.header__title{
-    font-size:30px;
->>>>>>> 2b5d20c52d37e0d3f44100c1119faf8f34087355
     letter-spacing: 1px;
     color: $dark_grey;
     background-color: rgba(236, 161, 75, 0.274);
@@ -247,11 +210,7 @@ h3.header__title{
 h4{
     font-size: 1.2em;
     display: block;
-<<<<<<< HEAD
     height: 1.5em;
-=======
-    height: 50px;
->>>>>>> 2b5d20c52d37e0d3f44100c1119faf8f34087355
     font-weight: 200;
 
     &.filter_name{
@@ -294,11 +253,7 @@ h4{
 //// h6
 
 
-<<<<<<< HEAD
 h1.pad{
-=======
-h6{
->>>>>>> 2b5d20c52d37e0d3f44100c1119faf8f34087355
     font-size: 25px;
     font-weight: lighter;
     margin: 2% 0%;
@@ -368,11 +323,7 @@ p.return{
 }
 
 .card{
-<<<<<<< HEAD
     width: 85%;
-=======
-    width: 80%;
->>>>>>> 2b5d20c52d37e0d3f44100c1119faf8f34087355
     text-align: -webkit-center;
     border: solid grey;
     background-color: white;
@@ -392,7 +343,6 @@ p.return{
     &--small{
         
         @include smallScreen{
-<<<<<<< HEAD
             width: 80%;
         }
     }
@@ -401,12 +351,6 @@ p.return{
         height: 16em;
     }
 
-=======
-            width: 70%;
-        }
-    }
-
->>>>>>> 2b5d20c52d37e0d3f44100c1119faf8f34087355
     &__header{
         height: 300px;
         display: flex;
@@ -418,13 +362,9 @@ p.return{
             height: 200px;
         }
 
-<<<<<<< HEAD
         &--xsmall{
             height: 60%;
         }
-=======
-
->>>>>>> 2b5d20c52d37e0d3f44100c1119faf8f34087355
         img{
             max-height: 90%;
             max-width: 90%;
@@ -448,11 +388,7 @@ p.return{
         height: 450px;
         
         &--small{
-<<<<<<< HEAD
             height: 130px;
-=======
-            height: 100px;
->>>>>>> 2b5d20c52d37e0d3f44100c1119faf8f34087355
             margin-top: 20px;
             border-top: solid 1px;
             @include smallScreen{
@@ -460,7 +396,6 @@ p.return{
                 margin-top: 0;
             }
         }
-<<<<<<< HEAD
 
         &--h400{
             height: 400px;
@@ -485,25 +420,12 @@ p.return{
             margin: 0.2em;
             font-size: 0.9em;
         }
-=======
->>>>>>> 2b5d20c52d37e0d3f44100c1119faf8f34087355
 
-        &--h400{
-            height: 400px;
-            @include smallScreen{
-                height: auto;
-                margin-top: 0;
-            }
-        }
         .card__button{
             margin-bottom: 10px;
 
             @include smallScreen{
-<<<<<<< HEAD
                 padding: 10px;
-=======
-                padding: 20px;
->>>>>>> 2b5d20c52d37e0d3f44100c1119faf8f34087355
                 margin-bottom: 0px;
             }
         }
@@ -563,13 +485,8 @@ p.return{
 }
 
 .divider{
-<<<<<<< HEAD
     border-top: solid 5px rgba(255, 140, 0, 0.5803921569);
     margin: 0.9em;
-=======
-    border-top: solid 5px #ff8c0094;
-    margin: 50px 0;
->>>>>>> 2b5d20c52d37e0d3f44100c1119faf8f34087355
 }
 
 //// a
@@ -658,11 +575,6 @@ form{
         background-color: rgba(255, 255, 255, 0.8);
     }
 
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 2b5d20c52d37e0d3f44100c1119faf8f34087355
     @include smallScreen{
         width: 80%;
         padding: 5%;
@@ -740,18 +652,12 @@ input{
     width: -moz-available;
     text-align: center;
     border: solid 1px $dark_grey;
-<<<<<<< HEAD
     @include mediumScreen {
         height: 25px;
         font-size: 16px;
     }
 
     @include smallScreen { 
-=======
-    @include smallScreen{
-       height: 25px;
-       font-size: 16px;
->>>>>>> 2b5d20c52d37e0d3f44100c1119faf8f34087355
        text-align-last: center;
     }
 
