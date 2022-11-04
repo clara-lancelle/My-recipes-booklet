@@ -1,6 +1,9 @@
 <?php 
 session_start();
+<<<<<<< HEAD
 include "configuration.php";
+=======
+>>>>>>> 2b5d20c52d37e0d3f44100c1119faf8f34087355
 
 include "includes/function_inscription.php";
 
@@ -11,7 +14,11 @@ if(isset($return['id'])){
 $_SESSION['id'] = $return['id']['user_id'];
 }
 if(!empty($_SESSION['id'])){
+<<<<<<< HEAD
     header("location: ".BASE_URL."/my_recipes.php");
+=======
+    header("location: my_recipes.php");
+>>>>>>> 2b5d20c52d37e0d3f44100c1119faf8f34087355
 die();
     
 }else{
@@ -22,9 +29,17 @@ die();
 <!DOCTYPE html>
 <html lang="en"> 
 <head>
+<<<<<<< HEAD
 
 
   <?php include "includes/include_meta_link.php"; ?>>
+=======
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="/includes/img/favicon.png" type="image/png">
+  <Link href="style.css" rel="stylesheet" type="text/css" />
+>>>>>>> 2b5d20c52d37e0d3f44100c1119faf8f34087355
   
   <title>Mon carnet de recettes - Inscription </title>
 
@@ -39,7 +54,11 @@ die();
     <main class="smaller ins small-top">
         <section class="bloc ins">
 
+<<<<<<< HEAD
             <h1 class="bloc__title"> Inscription : </h1>
+=======
+            <h2 class="bloc__title"> Inscription : </h2>
+>>>>>>> 2b5d20c52d37e0d3f44100c1119faf8f34087355
 
                 <form  class="form--bg" action="#" name='inscription' method="post">
 
@@ -128,10 +147,16 @@ die();
             <?php } ?>
         </section>
     </main>
+<<<<<<< HEAD
 <?php 
 include  "includes/footer.php"; 
 include "includes/include_script.php";
 ?> 
+=======
+<?php include "includes/footer.php"; ?> 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="/js/index.js"></script>
+>>>>>>> 2b5d20c52d37e0d3f44100c1119faf8f34087355
 </body>
 
 </html>

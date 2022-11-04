@@ -20,14 +20,20 @@ if(isset($_GET['page']) && !empty($_GET['page'])){
 include "includes/function_my_recipes.php";
 
     $user_id = $_SESSION['id'];
+<<<<<<< HEAD
 
 //filter
     if(isset($_GET['filter'])){
         $filter = $_GET['filter'];
+=======
+    if(isset($_POST['filter'])){
+        $filter = $_POST['filter'];
+>>>>>>> 2b5d20c52d37e0d3f44100c1119faf8f34087355
     }else{
         $filter_tab['0']['empty'] = 'none';
         $filter = $filter_tab['0'];
     }
+<<<<<<< HEAD
 //sort
     if(isset($_GET['sort'])){
         $sort = $_GET['sort'];
@@ -37,6 +43,9 @@ include "includes/function_my_recipes.php";
     }
 
     $return = getRecipes($user_id, $current_page_nb, $filter, $sort); 
+=======
+    $return = getRecipes($user_id, $current_page_nb, $filter); 
+>>>>>>> 2b5d20c52d37e0d3f44100c1119faf8f34087355
 
     if(!isset($return['error'])){
         $pages = $return['pages_nb'];
@@ -48,9 +57,19 @@ include "includes/function_my_recipes.php";
 <!DOCTYPE html>
 <html lang="en"> 
 <head >
+<<<<<<< HEAD
 
     <?php include "includes/include_meta_link.php"; ?>
     <title>Mon carnet de recettes - Mes recettes de cuisine</title>
+=======
+  <!-- Required meta tags -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">   
+  <link rel="icon" href="/includes/img/favicon.png" type="image/png">
+  <Link href="/style.css" rel="stylesheet" type="text/css" />
+  
+  <title>Mes recettes - Mes recettes</title>
+>>>>>>> 2b5d20c52d37e0d3f44100c1119faf8f34087355
  
 </head>
 
@@ -60,6 +79,7 @@ include "includes/function_my_recipes.php";
         <?php include "includes/navbar.php" ?>
     </header>
 
+<<<<<<< HEAD
     <main class="bloc bg_card_my <?php if(isset($return['error'])){echo 'smaller';} ?>">
 
         <section class="bloc">
@@ -93,6 +113,14 @@ include "includes/function_my_recipes.php";
                 </div>
             <div class="bloc__body--card"> 
                 
+=======
+    <main class="bloc bg_card_my">
+
+        <section class="bloc">
+            <h2 class="bloc__title bloc__title--bg">Mes recettes</h2>
+            <div class="bloc__body--card"> 
+            
+>>>>>>> 2b5d20c52d37e0d3f44100c1119faf8f34087355
                 <?php 
                 if(isset($return['error'])){  
                     foreach($return['error'] as $errors => $error){ 
@@ -103,6 +131,7 @@ include "includes/function_my_recipes.php";
                     }
                 }
                     ?>
+<<<<<<< HEAD
 
                 <?php
                 if(isset($filter)){
@@ -114,6 +143,20 @@ include "includes/function_my_recipes.php";
                 }
                 if(!isset($return['error'])){  
 
+=======
+                <form id="filterTable" name="filter" method="POST" action="#">
+                    <button type="submit" class="btn filter_button" name="filter['entree']" value="1">Entrées</button>
+                    <button type="submit" class="btn filter_button" name="filter['plat']" value="2">Plats</button>
+                    <button type="submit" class="btn filter_button" name="filter['dessert']" value="3">Desserts</button>
+                    <button type="submit" class="btn filter_button" name="filter['amuse']"value="4">Amuses bouches</button>
+                    <button type="submit" class="btn filter_button" name="filter['accompagnement']"value="5">Accompagnements</button>
+                    <button type="submit" class="btn filter_button" name="filter['sauce']"value="6">Sauces</button>
+                    <button type="submit" class="btn filter_button" name="filter['boisson']"value="7" >Boissons</button>
+                </form>
+
+                <?php
+                if(!isset($return['error'])){ 
+>>>>>>> 2b5d20c52d37e0d3f44100c1119faf8f34087355
                     $i = 0;
                     foreach($recipes as $array => $recipe){
 
@@ -121,7 +164,12 @@ include "includes/function_my_recipes.php";
                     <div class="card">
                         <div class="card__header">
                             <?php 
+<<<<<<< HEAD
                             echo '<img src="'.BASE_URL.'/Pictures/'.$recipe['name'].'"  class="card__img" alt="image de ma recette de cuisine" >';
+=======
+                            echo '<img src="/Pictures/'.$recipe['name'].'" 
+                                class="card__img" alt="votre image" >';
+>>>>>>> 2b5d20c52d37e0d3f44100c1119faf8f34087355
                             ?> 
                         </div>
 
@@ -136,6 +184,14 @@ include "includes/function_my_recipes.php";
                             </button>
                         
                             <div id="<?php echo 'drop-collapse'.$i;?>" class="bloc__collapse">
+<<<<<<< HEAD
+=======
+                            <div class="card__button"> 
+                                    <form class="noPad" action="/recipe_extension.php" method="get" enctype="multipart/form-data">
+                                        <button type="submit" class="btn btn--extend btn--extend--my" name="extend_btn" <?php echo 'value="'.$recipe['recipe_id'].'"'; ?> > <i class="bi bi-box-arrow-up-right"></i> </button>
+                                    </form>
+                            </div>
+>>>>>>> 2b5d20c52d37e0d3f44100c1119faf8f34087355
                                 <?php
                                     echo 
                                     '<ul class="list-group">
@@ -190,6 +246,7 @@ include "includes/function_my_recipes.php";
                                         }
                                         ?>
                                         </li>
+<<<<<<< HEAD
                                     </ul>
                                 <div class="bloc__row">
                                     <div class="card__button"> 
@@ -202,6 +259,13 @@ include "includes/function_my_recipes.php";
                                             <button type="submit" class="btn btn--edit btn--edit--my" name="edit_btn" <?php echo 'value="'.$recipe['recipe_id'].'"'; ?> > <i class="bi bi-pencil-fill"></i> Editer  </button>
                                         </form>
                                     </div>
+=======
+                                    </ul>  
+                                <div class="card__button"> 
+                                    <form class="noPad" action="/edit_recipes.php" method="get" enctype="multipart/form-data">
+                                        <button type="submit" class="btn btn--edit btn--edit--my" name="edit_btn" <?php echo 'value="'.$recipe['recipe_id'].'"'; ?> > <i class="bi bi-pencil-fill"></i> Editer  </button>
+                                    </form>
+>>>>>>> 2b5d20c52d37e0d3f44100c1119faf8f34087355
                                 </div>
                                 <?php $i++;?>
                             </div>
@@ -245,9 +309,15 @@ include "includes/function_my_recipes.php";
         </section>
     </main>
 
+<<<<<<< HEAD
 <?php 
 include  "includes/footer.php"; 
 include "includes/include_script.php";
 ?> 
+=======
+<?php include "includes/footer.php" ?>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="/js/index.js"></script>
+>>>>>>> 2b5d20c52d37e0d3f44100c1119faf8f34087355
 </body>
 </html>

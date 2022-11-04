@@ -28,8 +28,16 @@ if(isset($return_form['success'])&& $return_form['success']=== true){
 <html lang="en"> 
 <head>
 
+<<<<<<< HEAD
   <?php include "includes/include_meta_link.php"; ?>
   <title>Mon carnet de recettes - Ajouter une recette</title>
+=======
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width">
+  <link rel="icon" href="/includes/img/favicon.png" type="image/png">
+  <Link href="style.css" rel="stylesheet" type="text/css" />
+  <title>Mes recettes - Ajouter une recette</title>
+>>>>>>> 2b5d20c52d37e0d3f44100c1119faf8f34087355
 
 </head>
 <body>
@@ -97,6 +105,7 @@ if(isset($return_form['success'])&& $return_form['success']=== true){
                             </div>
                             <?php } ?>
                         <label class="form-label" for="select"> Catégorie : </label>
+<<<<<<< HEAD
                         <select name="cat" id="cat" class="form-control">s
                             <?php 
                                 if(!empty($_POST['cat'])){
@@ -124,6 +133,28 @@ if(isset($return_form['success'])&& $return_form['success']=== true){
                                 }
                             ?>
                     </select>
+=======
+                        <select name="cat" id="cat" class="form-control"  >
+                            <option 
+                                <?php 
+                                if(!empty($_POST['cat']) && isset($return_form['errors']) || isset($return_recipe['errors'])){
+                                        echo 'value="'.$_POST['cat'].'"';
+                                } ?>
+                                > 
+                                <?php 
+                                if(!empty($_POST['cat']) && isset($return_form['errors']) || isset($return_recipe['errors'])){
+                                        echo $_POST['cat'];
+                                } ?> 
+                            </option>
+                            <option value="Entrées">Entrées</option>
+                            <option value="Plats">Plats</option>
+                            <option value="Desserts">Desserts</option>
+                            <option value="Amuses bouches">Amuses bouches</option>
+                            <option value="Accompagnements">Accompagnements</option>
+                            <option value="Sauces">Sauces</option>
+                            <option value="Boissons">Boissons</option>
+                        </select>
+>>>>>>> 2b5d20c52d37e0d3f44100c1119faf8f34087355
                     </div> 
                     <div class="form__field bloc_in_bloc">
                         <label for="guest" class="form-label">Pour combien de personnes : </label>
@@ -223,7 +254,11 @@ if(isset($return_form['success'])&& $return_form['success']=== true){
                         >
                         <label for="eleve" class="form-check-label">Elevé</label>
                             <?php if(isset($return_form['errors']['price'])) { ?>
+<<<<<<< HEAD
                             <div class="return_error return_error row">
+=======
+                            <div class="return_error">
+>>>>>>> 2b5d20c52d37e0d3f44100c1119faf8f34087355
                                 <?php echo $return_form['errors']['price']; ?>
                             </div>
                             <?php } ?>
@@ -282,6 +317,7 @@ if(isset($return_form['success'])&& $return_form['success']=== true){
                     <div class="steps">
                         <legend> Etapes de votre recette : </legend>
                         <?php if (isset($return_form['errors']['step'])) { ?>
+<<<<<<< HEAD
                             <div class="return_error">
                                 <?php echo $return_form['errors']['step']; ?>
                             </div>
@@ -352,6 +388,44 @@ if(isset($return_form['success'])&& $return_form['success']=== true){
                                     </div>
                                 <?php }
                             }?> 
+=======
+                        <div class="return_error">
+                            <?php echo $return_form['errors']['step']; ?>
+                        </div>
+                        <?php } ?>
+                        <textarea name="step1" id="steps" cols="30" rows="3" ><?php 
+                            if(!empty($_POST['step1']) && isset($return_form['errors']) || isset($return_recipe['errors'])){
+                                echo $_POST['step1'];}else{ echo '1.';
+                        } ?> </textarea>
+                        <textarea name="step2" id="steps" cols="30" rows="3" ><?php 
+                            if((!empty($_POST['step2'])) && (isset($return_form['errors']) || isset($return_recipe['errors']))){
+                                echo $_POST['step2'];}else{ echo '2.';
+                            } ?> </textarea>
+                        <textarea name="step3" id="steps" cols="30" rows="3"><?php 
+                            if((!empty($_POST['step3'])) && isset($return_form['errors']) || isset($return_recipe['errors'])){
+                                echo $_POST['step3'];}else{ echo '3.';
+                            } ?> </textarea>
+                        <textarea name="step4" id="steps" cols="30" rows="3" ><?php 
+                            if(!empty($_POST['step4']) && isset($return_form['errors']) || isset($return_recipe['errors'])){
+                                echo $_POST['step4'];}else{ echo '4.';
+                            } ?> </textarea>
+                        <textarea name="step5" id="steps" cols="30" rows="3" ><?php 
+                            if(!empty($_POST['step5']) && isset($return_form['errors']) || isset($return_recipe['errors'])){
+                                echo $_POST['step5'];}else{ echo '5.';
+                            } ?> </textarea>
+                    </div>
+                    <div class="form__field">
+                        <label for="picture" class="form-label">Illustration de votre recette :</label>
+                        <input type="file" id="picture" class="form-input margin-top" name="picture" accept="image/png, image/jpg, image/jpeg, image/webp">
+                        <?php if (isset($return_form['errors']['img'])) {
+                                foreach($return_form['errors']['img'] as $error_img){
+                                    ?>
+                                    <div class="return_error">
+                                        <?php echo '<h3 class="return_error">'.$error_img.'</h3>'; ?>
+                                    </div>
+                                    <?php  }
+                                }   ?> 
+>>>>>>> 2b5d20c52d37e0d3f44100c1119faf8f34087355
                         <?php if (isset($return_form['errors']['invalid'])) { ?>
                             <div class="return_error">
                                 <?php echo '</br>'.$return_form['errors']['invalid']; ?>
@@ -365,10 +439,16 @@ if(isset($return_form['success'])&& $return_form['success']=== true){
             </div> 
         </section>
     </main>        
+<<<<<<< HEAD
 <?php 
 include  "includes/footer.php"; 
 include "includes/include_script.php";
 ?>  
 
+=======
+<?php include "includes/footer.php" ?>  
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="/js/index.js"></script>
+>>>>>>> 2b5d20c52d37e0d3f44100c1119faf8f34087355
 </body>
 </html>

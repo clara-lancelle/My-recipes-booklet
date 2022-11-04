@@ -19,7 +19,14 @@ if(!isset($_GET['edit_btn']) || empty( $_GET['edit_btn'])){
 <html lang="en"> 
 <head>
   <!-- Required meta tags -->
+<<<<<<< HEAD
   <?php include "includes/include_meta_link.php"; ?>
+=======
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="/includes/img/favicon.png" type="image/png">
+  <Link href="style.css" rel="stylesheet" type="text/css" />
+>>>>>>> 2b5d20c52d37e0d3f44100c1119faf8f34087355
   
   <title>Mon carnet de recettes - Edition de ma recette </title>
 
@@ -57,6 +64,7 @@ if(!isset($_GET['edit_btn']) || empty( $_GET['edit_btn'])){
                     if(!empty($_POST)){ 
             
                         $return_edit = getEdit($_POST,$_FILES,$recipe_id);
+<<<<<<< HEAD
                    
                     }
                     if(isset($return_edit['message'])){?>
@@ -69,6 +77,16 @@ if(!isset($_GET['edit_btn']) || empty( $_GET['edit_btn'])){
                         </svg>
                     </div>
                    <?php } ?>
+=======
+                      
+                    
+                    }
+                    if(isset($return_edit['message'])){
+                        echo '<h3 class="return_message">'.$return_edit['message'].'</h3>';
+                        exit();
+                    }
+                ?>
+>>>>>>> 2b5d20c52d37e0d3f44100c1119faf8f34087355
                 
                 
             <form id="form" class="form--bg" action="#" name='form' method="post" enctype="multipart/form-data">
@@ -108,6 +126,7 @@ if(!isset($_GET['edit_btn']) || empty( $_GET['edit_btn'])){
                         </div>
                         <?php } ?>
                     <label class="form-label" for="select"> Catégorie : </label>
+<<<<<<< HEAD
                     <select name="cat" id="cat" class="form-control">
 
                     <?php   if(!empty($data['type'])&& empty($_POST['cat'])){
@@ -134,6 +153,32 @@ if(!isset($_GET['edit_btn']) || empty( $_GET['edit_btn'])){
                         if($cat!=="Boissons"){echo '<option value="Boissons">Boissons</option>';
                         }
                         ?>
+=======
+                    <select name="cat" id="cat" class="form-control" >
+                        <option  
+                            <?php 
+                            if(!empty($data['type'])&& empty($_POST['cat'])){
+                                    echo 'value="'.$data['type'].'"';
+                                }
+                                
+                                if(!empty($_POST['cat'])){
+                                    echo 'value="'.$_POST['cat'].'"';
+                            } 
+                            ?> > <?php if(!empty($data['type'])&& empty($_POST['cat'])){
+                                echo $data['type'];
+                            }
+                            if(!empty($_POST['cat'])){
+                                echo $_POST['cat'];
+                            }   ?>
+                        </option>
+                        <option value="Entrées">Entrées</option>
+                        <option value="Plats">Plats</option>
+                        <option value="Desserts">Desserts</option>
+                        <option value="Amuses bouches">Amuses bouches</option>
+                        <option value="Accompagnements">Accompagnements</option>
+                        <option value="Sauces">Sauces</option>
+                        <option value="Boissons">Boissons</option>
+>>>>>>> 2b5d20c52d37e0d3f44100c1119faf8f34087355
                     </select>
                 </div>
                 <div class="form__field">
@@ -295,6 +340,7 @@ if(!isset($_GET['edit_btn']) || empty( $_GET['edit_btn'])){
                             <?php echo $return_form['errors']['step']; ?>
                         </div>
                         <?php } ?>
+<<<<<<< HEAD
                         
                             <?php 
                             if(!empty($data['step1'])&& empty($_POST['step1'])){
@@ -354,6 +400,60 @@ if(!isset($_GET['edit_btn']) || empty( $_GET['edit_btn'])){
 
                     </div>
                 <div class="form__field form__field__img">
+=======
+                        <textarea name="step1" id="steps" cols="30" rows="4" >
+                            <?php 
+                            if(!empty($data['step1'])&& empty($_POST['step1'])){
+                                echo br2nl($data['step1']);
+                            }   
+                            if(!empty($_POST['step1'])){
+                                    echo $_POST['step1'];
+                            } 
+                            ?> 
+                        </textarea>
+                        <textarea name="step2" id="steps" cols="30" rows="4" > 
+                            <?php 
+                            if(!empty($data['step2'])&& empty($_POST['step2'])){
+                                echo br2nl($data['step2']);
+                            }   
+                            if(!empty($_POST['step2'])){
+                                    echo $_POST['step2'];
+                            } 
+                            ?>  
+                        </textarea>
+                        <textarea name="step3" id="steps" cols="30" rows="4">
+                            <?php 
+                            if(!empty($data['step3'])&& empty($_POST['step3'])){
+                                echo br2nl($data['step3']);
+                            }   
+                            if(!empty($_POST['step3'])){
+                                    echo $_POST['step3'];
+                            } 
+                            ?> 
+                            </textarea>
+                        <textarea name="step4" id="steps" cols="30" rows="4" > 
+                            <?php 
+                            if(!empty($data['step4'])&& empty($_POST['step4'])){
+                                echo br2nl($data['step4']);
+                            }   
+                            if(!empty($_POST['step4'])){
+                                    echo $_POST['step4'];
+                            } 
+                            ?>  
+                        </textarea>
+                        <textarea name="step5" id="steps" cols="30" rows="4" > 
+                            <?php 
+                            if(!empty($data['step5'])&& empty($_POST['step5'])){
+                                echo br2nl($data['step5']);
+                            }   
+                            if(!empty($_POST['step5'])){
+                                    echo $_POST['step5'];
+                            } 
+                            ?>  
+                        </textarea>
+                    </div>
+                <div class="form__field">
+>>>>>>> 2b5d20c52d37e0d3f44100c1119faf8f34087355
                     <label for="picture" class="form-label" >Illustration de votre recette :</label>
                                 <?php 
                                 if(isset($return_edit['temporary_file'])&& !empty($return_edit['temporary_file'])){
@@ -371,7 +471,10 @@ if(!isset($_GET['edit_btn']) || empty( $_GET['edit_btn'])){
                     <?php if(isset($return_edit['errors']['img'])){
                             foreach($return_edit['errors']['img'] as $error_img){
                                 echo '<h3 class="return_error">'.$error_img.'</h3>';
+<<<<<<< HEAD
                                 
+=======
+>>>>>>> 2b5d20c52d37e0d3f44100c1119faf8f34087355
                             }
                         }?>
                 </div>
@@ -382,11 +485,17 @@ if(!isset($_GET['edit_btn']) || empty( $_GET['edit_btn'])){
             <?php }  }?>
         </section>
     </main>
+<<<<<<< HEAD
 <?php 
     include "includes/footer.php"; 
     include "includes/include_script.php";
         ?>
 
+=======
+<?php include "includes/footer.php" ?>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="/js/index.js"></script>
+>>>>>>> 2b5d20c52d37e0d3f44100c1119faf8f34087355
 </body>
 
 </html>

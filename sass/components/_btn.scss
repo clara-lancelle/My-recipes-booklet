@@ -38,12 +38,15 @@
         color:white; 
         padding: 2% 1%;
         height: 50px;
+<<<<<<< HEAD
 
         @include x_smallScreen{
             height: 40px;
             width: 140px;
             font-size: 15px;
         }
+=======
+>>>>>>> 2b5d20c52d37e0d3f44100c1119faf8f34087355
 
         &--my{
             background-color: rgba(78,78,88,255);
@@ -81,12 +84,15 @@
         color: white;
         border: solid rgb(193 124 90 / 78%);
 
+<<<<<<< HEAD
         @include x_smallScreen{
             height: 40px;
             width: 140px;
             font-size: 15px;
         }
 
+=======
+>>>>>>> 2b5d20c52d37e0d3f44100c1119faf8f34087355
 
         &--my{
             background-color: rgba(187,96,137,255);
@@ -114,8 +120,13 @@
         padding: 10px;
     }
 
+<<<<<<< HEAD
     &.filter_button, &.sort_button{
         padding: 10px 1px;
+=======
+    &.filter_button{
+        padding: 15px 1px;
+>>>>>>> 2b5d20c52d37e0d3f44100c1119faf8f34087355
         color: $dark_grey;
         background: white;
         border: 3px solid #87cdc5;
