@@ -3,7 +3,7 @@
     "bootstrap-icons": "^1.9.1",
     "sass": "^1.53.0"
   },
-  "name": "td_recipes",
+  "name": "my_recipes_booklet",
   "description": "## this website is a recipe book online made with the instructions of a BTS test.",
   "version": "1.0.0",
   "main": "index.js",

@@ -1,27 +1,32 @@
 <?php 
 session_start();
+include "configuration.php";
+
 include "includes/function_inscription.php";
 
 if(!empty($_POST)){
     $return = fct_inscription($_POST);
-    
-    if(isset($return['id'])){
-    $_SESSION['id'] = $return['id']['user_id'];
-    }
+}    
+if(isset($return['id'])){
+$_SESSION['id'] = $return['id']['user_id'];
 }
+if(!empty($_SESSION['id'])){
+    header("location: ".BASE_URL."/my_recipes.php");
+die();
+    
+}else{
+
 
 ?>
 
 <!DOCTYPE html>
 <html lang="en"> 
 <head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" href="http://localhost/TD_RECIPES/includes/img/favicon.png" type="image/png">
-  <Link href="style.css" rel="stylesheet" type="text/css" />
+
+
+  <?php include "includes/include_meta_link.php"; ?>>
   
-  <title>Mes recettes - Inscription </title>
+  <title>Mon carnet de recettes - Inscription </title>
 
 </head>
 
@@ -34,9 +39,7 @@ if(!empty($_POST)){
     <main class="smaller ins small-top">
         <section class="bloc ins">
 
-            <h2 class="bloc__title"> Inscription : </h2>
-
-            <?php if(empty($_SESSION['id'])){ ?>
+            <h1 class="bloc__title"> Inscription : </h1>
 
                 <form  class="form--bg" action="#" name='inscription' method="post">
 
@@ -123,18 +126,12 @@ if(!empty($_POST)){
                 </div>
             </form>
             <?php } ?>
-
-            <?php if(!empty($_SESSION['id'])){ ?>
-                <div class="connect">
-                    <p class="text-center bigger" >Vous êtes inscrit(e), bienvenue !</p>
-                </div>
-            <?php header("location: my_recipes.php");
-            die(); } ?>
         </section>
     </main>
-<?php include "includes/footer.php"; ?> 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-<script src="http://localhost/TD_RECIPES/js/index.js"></script>
+<?php 
+include  "includes/footer.php"; 
+include "includes/include_script.php";
+?> 
 </body>
 
 </html>

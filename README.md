@@ -1,4 +1,4 @@
-# TD Recipes
+# My recipes booklet
 
 ## Context of project
 

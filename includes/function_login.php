@@ -1,12 +1,13 @@
-<?php 
-include "data_base.php";
+<?php
+include "./data_base.php";
 
 
 const STATUS_ERROR = 'error';
 const STATUS_SUCCESS = 'success';
 
 
-function fct_connexion(array $array) {
+function fct_connexion(array $array)
+{
 	$data = $array ?? [];
 	$status = STATUS_SUCCESS;
 	$errors = [];
@@ -21,40 +22,40 @@ function fct_connexion(array $array) {
 		$status = STATUS_ERROR;
 		$errors['email'] = 'L\'email est vide';
 	}
-	
-	if(!empty($data['email'])){
 
-		if((!filter_var($data['email'], FILTER_VALIDATE_EMAIL))){
+	if (!empty($data['email'])) {
+
+		if ((!filter_var($data['email'], FILTER_VALIDATE_EMAIL))) {
 			$status = STATUS_ERROR;
 			$errors['invalid_email'] = 'Merci de renseigner un email valide';
 		}
 	}
 
-	if(filter_var($data['email'], FILTER_VALIDATE_EMAIL)&&!empty($data['email'])){
-		
+	if (filter_var($data['email'], FILTER_VALIDATE_EMAIL) && !empty($data['email'])) {
+
 		$dbco = getConnexion();
 
-			$email = trim($data['email']);
+		$email = trim($data['email']);
 
-			$sth = $dbco->prepare("SELECT COUNT(user_id) AS count FROM user
+		$sth = $dbco->prepare("SELECT COUNT(user_id) AS count FROM user
 			WHERE user_email = :email");
-			$sth->bindParam(':email', $email );
-			$sth->execute();
+		$sth->bindParam(':email', $email);
+		$sth->execute();
 
-			$result = $sth->fetch();
+		$result = $sth->fetch();
 
-			if ($result['count'] == 0){
-				$status = STATUS_ERROR;
-				$errors['invalid_count'] = 'Vos identifiants sont invalides';
-			}
+		if ($result['count'] == 0) {
+			$status = STATUS_ERROR;
+			$errors['invalid_count'] = 'Vos identifiants sont invalides';
+		}
 	}
 
-	if ($status == STATUS_SUCCESS) { 
+	if ($status == STATUS_SUCCESS) {
 
 		$pass = $data['password'];
 		$email = $data['email'];
 
-		try{
+		try {
 			$sth = $dbco->prepare("SELECT password FROM user
 									WHERE user_email = :email");
 
@@ -63,40 +64,40 @@ function fct_connexion(array $array) {
 
 			$pass_hash = $sth->fetch();
 
-			if(strlen($pass_hash['password'])>20){
+			if (strlen($pass_hash['password']) > 20) {
 
-				if(!password_verify($pass,$pass_hash['password'])){
+				if (!password_verify($pass, $pass_hash['password'])) {
 					$status = STATUS_ERROR;
 					$errors['invalid_hash'] = 'Vos identifiants sont invalides';
 				}
 			}
 
-			if(strlen($pass_hash['password'])<=20){
+			if (strlen($pass_hash['password']) <= 20) {
 
-				if($pass!==$pass_hash['password']){
+				if ($pass !== $pass_hash['password']) {
 					$status = STATUS_ERROR;
 					$errors['invalid_hash'] = 'Vos identifiants sont invalides';
 				}
 			}
-			
-			if ($status == STATUS_SUCCESS) { 
+
+			if ($status == STATUS_SUCCESS) {
 
 				$sql = $dbco->prepare("
 				SELECT user_id FROM user
 				WHERE user_email = :email");
 
-				$sql -> bindParam(':email', $email);
+				$sql->bindParam(':email', $email);
 
 				$sql->execute();
 
 				$user_id = $sql->fetch();
 			}
 
-		}catch(PDOException $e){
+		} catch (PDOException $e) {
 			$status = STATUS_ERROR;
 			$e->getMessage();
 		}
-    
+
 	}
 
 
@@ -107,11 +108,12 @@ function fct_connexion(array $array) {
 		];
 	}
 
-    
-    return [
-        'success' => true,
-        'id' => $user_id,
-    ];
+
+	return [
+		'success' => true,
+		'id' => $user_id,
+	];
 
 }
+
 ?>

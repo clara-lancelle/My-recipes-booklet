@@ -3,7 +3,7 @@
 function getConnexion(){
 
     $servername = 'localhost';
-    $dbname = 'db_recipe';
+    $dbname = 'recipes';
     $user = 'root';
     $password = '';
     $dbco = new PDO("mysql:host=$servername;dbname=$dbname;charset=utf8mb4",$user,$password);

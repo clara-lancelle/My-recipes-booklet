@@ -1,18 +1,30 @@
-<?php 
+<?php
 session_start();
+include "configuration.php";
+
+if (!isset($_SESSION['id']) || empty($_SESSION['id'])) {
+    if (isset($_COOKIE)) {
+        setcookie("PHPSESSID", "", time() - 3600, "/");
+    }
+    header("location:" . BASE_URL . "/index.php");
+    exit();
+}
+
+if (isset($_POST['logout'])) {
+    session_destroy();
+    header("location:" . BASE_URL . "/index.php");
+    die();
+}
 ?>
 
 <!DOCTYPE html>
-<html lang="en"> 
+<html lang="en">
+
 <head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8" />
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" href="http://localhost/TD_RECIPES/includes/img/favicon.png" type="image/png">
-  <Link href="style.css" rel="stylesheet" type="text/css" />
-  
-  <title>Mes recettes - Déconnexion </title>
+
+    <?php include "includes/include_meta_link.php"; ?>
+
+    <title>Mon carnet de recettes - Déconnexion </title>
 
 </head>
 
@@ -22,31 +34,27 @@ session_start();
         <?php include "includes/navbar.php" ?>
     </header>
 
-    <main class="smaller">
+    <main class="smaller grey">
 
         <?php
-            if(!isset($_POST['logout'])){
+if (!isset($_POST['logout'])) {
 
-        ?>
+?>
 
-        <section class="bloc text-center bloc--pad" >
-            <h6 class="pad">Voulez-vous vous déconnecter du carnet de recettes ?</h6>
-                <form action="#" method="post" enctype="multipart/form-data">
-                    <button class="btn btn--logout" type="submit" name="logout" value="true">Me deconnecter</button>
-                </form>
+        <section class="bloc text-center bloc--pad">
+            <h1 class="pad">Voulez-vous vous déconnecter du carnet de recettes ?</h1>
+            <form action="#" method="post" enctype="multipart/form-data">
+                <button class="btn btn--logout" type="submit" name="logout" value="true">Me déconnecter</button>
+            </form>
 
             <?php
-                }else{
-                    session_destroy();
-                    echo 'vous avez été déconnecté(e) avec succès !';
-                    header("location: index.php");
-                    die(); 
-                } 
-            ?>
+} ?>
         </section>
     </main>
-<?php include "includes/footer.php" ?>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-<script src="http://localhost/TD_RECIPES/js/index.js"></script>
+    <?php
+include "includes/footer.php";
+include "includes/include_script.php";
+?>
 </body>
+
 </html>

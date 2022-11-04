@@ -1,8 +1,14 @@
 *{
     font-family: sans-serif;
-    font-size: 18px;
+    font-size: 1em;
+
+    @include xx_smallScreen{
+        font-size: 0.9em;
+    }
 }
 
+
+ 
 html{
     height: 100%;
 }
@@ -15,10 +21,10 @@ body{
 
 
 main{
-    max-width: 1400px;
+    max-width: 1300px;
     margin: auto;
     padding-bottom: 12px;
-    margin-top: 78px;
+    margin-top: 69px;
     min-height: 1000px;
 
     @include smallScreen{
@@ -36,17 +42,22 @@ main{
             margin-top: 60px;
         }
     }
+    &.grey{
+        background: rgb(217 217 217 / 24%);
+    }
+    &.smaller{
+        min-height: calc(100vh - 141px);
+        @include smallScreen{
+            min-height: calc(100vh - 128px);
+        }
+        @include x_smallScreen{
+            min-height: calc(100vh - 118px);
+        }
+    }
+    
+
 }
 
-main.smaller{
-    min-height: calc(100vh - 150px);
-    @include smallScreen{
-        min-height: calc(100vh - 138px);
-    }
-    @include x_smallScreen{
-        min-height: calc(100vh - 135px);
-    }
-}
 
 
 //// Ban
@@ -66,11 +77,15 @@ section.ban{
 
 section.bloc{
     box-sizing: border-box;
-    padding: 20px 0 ;
+    text-align: center;
 
     &--pad{
         padding: 50px;
+        @include xx_smallScreen{
+            padding: 20px;
+        }
     }
+
 
 } 
 
@@ -79,9 +94,15 @@ section.bloc{
     grid-template-columns: repeat(2,1fr);
     place-items: center;
     row-gap: 30px;
+    margin: 1% 5%;
+    padding: 2%;
+    background: #f9f9f98f;
     
-    @include x_smallScreen{
+    @include s_smallScreen{
         grid-template-columns: 1fr;
+        margin: 2%;
+        padding: 1%;
+        margin: 1%;
     }
 }
 
@@ -126,14 +147,29 @@ section.bloc--smallMargin{
 }
 
 
+.bloc__row{
+    align-items: center;
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: 1fr 1fr;
+
+    @include x_smallScreen{
+        grid-auto-flow: row;
+        grid-template-columns: 1fr;;
+    }
+}
+
 //// bloc title
 
 
-h2.bloc__title{
+.bloc__title{
     text-align:center;
-    font-size: 2.5rem;
+    font-size: 1.8em;
     color: $dark_grey;
-    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    display: inline-grid;
+    margin: 1.6em;
+    position: inherit;
 
     &--pad{
         padding: 4% 0%;
@@ -144,22 +180,27 @@ h2.bloc__title{
     }
 
     @include x_smallScreen{
-        font-size: 25px;
+        font-size: 1.6em;
+         margin: 1.3em;
+
     }
     
 }
 
 //// header title
 
-h3.header__title{
-    font-size:40px;
-    letter-spacing: 4px;
+.header__title{
+    font-style: italic;
+    font-weight: 100;
+    font-size: 1.1em;
+    letter-spacing: 1px;
     color: $dark_grey;
     background-color: rgba(236, 161, 75, 0.274);
     padding: 4px 14px;
     margin-bottom: 40px;
+    font-weight: 300;
     @include x_smallScreen{
-        font-size: 20px;
+        font-size: 1.2em;
         margin-bottom: 20px;
     }
     
@@ -167,11 +208,19 @@ h3.header__title{
 
 
 h4{
-    font-size: 25px;
+    font-size: 1.2em;
     display: block;
-    height: 50px;
+    height: 1.5em;
+    font-weight: 200;
+
+    &.filter_name{
+        grid-row: 1;
+        grid-column: 1/3;
+        color: $dark_grey;
+    }
+
     @include smallScreen{
-        font-size: 20px;
+        font-size: 1.1em;
     }
 
     @include x_smallScreen{
@@ -181,11 +230,10 @@ h4{
 
 //// header subtitle
 
-h5.header__subtitle{
-    font-size: 22px;
+.header__subtitle{
+    margin: 2em 0;
     line-height: 37px;
-    margin-top: 50px;
-    margin-bottom: 50px;
+    font-size: 1.2em;
     color: $dark_grey;
     font-weight: lighter;
     @include x_smallScreen{
@@ -195,7 +243,7 @@ h5.header__subtitle{
     }
 }
 
-h5.subtitle{
+.subtitle{
     font-size: 22px;
     font-weight: bold;
     color: $dark_grey;
@@ -205,17 +253,18 @@ h5.subtitle{
 //// h6
 
 
-h6{
-    font-size: 20px;
+h1.pad{
+    font-size: 25px;
     font-weight: lighter;
     margin: 2% 0%;
     @include x_smallScreen{
-        font-size: 16px;
+        font-size: 17px;
      }
 
     &.ing__title{
         text-align: center;
         margin: 30px;
+        font-size: 20px;
     }
 }
 
@@ -258,15 +307,31 @@ p.return{
 //// card
 
 
+.card_group{
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-items: center;
+    
+    @include smallScreen{
+       
+        grid-auto-flow: row;
+        grid-template-columns: 1fr;
+        place-items: center;
+        grid-row-gap: 5px;
+    }
+}
+
 .card{
-    width: 600px;
+    width: 85%;
     text-align: -webkit-center;
     border: solid grey;
     background-color: white;
     border-radius: 10px;
 
-    @include smallScreen{
+    @include x_smallScreen{
         width: 85%;
+        grid-column: 1;
     }
 
     &--orange{
@@ -275,20 +340,35 @@ p.return{
         border-radius: 10px;
     }
 
+    &--small{
+        
+        @include smallScreen{
+            width: 80%;
+        }
+    }
+
+    &--xsmall{
+        height: 16em;
+    }
+
     &__header{
-        height: 350px;
+        height: 300px;
         display: flex;
         align-items: center;
         justify-content: center;
+        background: #dbb08c1f;
 
         @include smallScreen{
             height: 200px;
         }
 
+        &--xsmall{
+            height: 60%;
+        }
         img{
-            height: 300px;
-            margin-top: 10px;
-
+            max-height: 90%;
+            max-width: 90%;
+        
             &:hover{
                 transform: scale(1.05);
                 @include smallScreen{
@@ -297,21 +377,66 @@ p.return{
             }
 
             @include smallScreen{
-                height: 90%;
+                max-height: 90%;
                 width: auto;
+                max-width: 90%;
             }
         }
     }
 
     &__body{
-        height: 500px;
+        height: 450px;
+        
+        &--small{
+            height: 130px;
+            margin-top: 20px;
+            border-top: solid 1px;
+            @include smallScreen{
+                height: auto;
+                margin-top: 0;
+            }
+        }
+
+        &--h400{
+            height: 400px;
+            @include smallScreen{
+                height: auto;
+                margin-top: 0;
+            }
+        }
+
+        &--xsmall{
+            height: 40%;
+            display: grid;
+        }
+
+        &__title{
+            font-size: 1em;
+            align-content: center;
+            margin: 1em;
+        }
+
+        &__p{
+            margin: 0.2em;
+            font-size: 0.9em;
+        }
 
         .card__button{
             margin-bottom: 10px;
 
             @include smallScreen{
                 padding: 10px;
+                margin-bottom: 0px;
             }
+        }
+
+        .bloc__collapse{
+
+            @include x_smallScreen{
+                border-top: solid 2px;
+                margin-top: 10px;
+            }
+            
         }
 
         @include x_smallScreen{
@@ -359,6 +484,10 @@ p.return{
     width: auto!important;
 }
 
+.divider{
+    border-top: solid 5px rgba(255, 140, 0, 0.5803921569);
+    margin: 0.9em;
+}
 
 //// a
 
@@ -393,7 +522,7 @@ ul{
             }
 
             &--p{
-                font-size: 20px;
+                font-size: 18px;
                 padding: 15px;
                 @include smallScreen{
                     font-size: 16px;
@@ -439,12 +568,12 @@ form{
 
     &.noPad{
         padding: 0;
+        width: auto;
     }
 
     &.form--bg{
         background-color: rgba(255, 255, 255, 0.8);
     }
-
 
     @include smallScreen{
         width: 80%;
@@ -465,6 +594,24 @@ form{
 
     &.form__field--90{
         width: 90%;
+    }
+
+    &__img{
+        display: grid;
+        justify-items: center;
+        grid-template-rows: 70px 230px 100px;
+        align-items: center;
+        background-color: #ffd8c157;
+       
+
+        img{
+            height: 220px;
+            border: white 20px solid;
+        }
+    }
+
+    &.hide{
+        display: none;
     }
 
     &--radio{
@@ -499,14 +646,23 @@ label{
 
 
 input{
-    height: 40px;
+    height: 30px;
     border-radius: 5px;
     width: -webkit-fill-available;
+    width: -moz-available;
     text-align: center;
-    @include smallScreen{
-       height: 25px;
-       font-size: 16px;
+    border: solid 1px $dark_grey;
+    @include mediumScreen {
+        height: 25px;
+        font-size: 16px;
+    }
+
+    @include smallScreen { 
        text-align-last: center;
+    }
+
+    &:focus{
+        border: solid 2px $grey;
     }
 
     &.form-control{
@@ -517,6 +673,8 @@ input{
             margin: 15px 0;
             font-size: 15px;
         }
+
+        
     }
     &.form-input--small{
         width: 100px;
@@ -542,7 +700,7 @@ input{
 }
 
 .field__ing{
-    padding: 40px;
+    padding: 30px;
     text-align: -webkit-center;
     margin: 20px 0 auto;
     padding: 20px 0;
@@ -564,7 +722,7 @@ legend{
 }
 
 select{
-    height: 40px;
+    height: 30px;
     border-radius: 5px;
 }
 
@@ -572,6 +730,7 @@ select{
 textarea{
     border-radius: 5px;
     width: -webkit-fill-available;
+    width: -moz-available;
     align-self: center;
     height: -webkit-fill-available;
     font-size: 18px;
@@ -602,13 +761,30 @@ textarea{
 }
 
 .return_message{
-    color: $succes;
-    font-weight:bold;
+    color: $success;
     text-align: center;
-    font-size: 20px;
-    @include smallScreen{
+    font-size: 22px;
+    padding: 10px;
+
+    @include xx_smallScreen{
         font-size: 15px;
         padding: 5px;
+    }
+}
+
+.success{
+
+    background-color: white;
+    padding: 40px;
+    border-radius: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
+    box-shadow: 3px 5px 5px 0.5px rgba(27, 25, 25, 0.219);
+    
+    svg{
+        height: 50px;
+        width: 50px;
+        color: $success;
     }
 }
 
@@ -644,4 +820,16 @@ textarea{
 
 .pad{
     padding: 20px;
+}
+
+.row{
+    grid-column: 1/3;
+}
+
+.disabled{
+    opacity: 0.3;
+}
+
+.show{
+    display: block;
 }

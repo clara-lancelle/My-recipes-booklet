@@ -1,10 +1,15 @@
 <?php
 session_start();
+include "configuration.php";
+// rends accessible la partie all recipes à tout le monde
 
-if(!isset($_SESSION['id']) || empty($_SESSION['id'])){
-   header("location: index.php");
+/*if(!isset($_SESSION['id']) || empty($_SESSION['id'])){
+    if(isset($_COOKIE)){
+        setcookie("PHPSESSID","",time()-3600,"/"); 
+    }
+   header("location:../index.php");
    exit();
-}
+}*/
 
 // On détermine sur quelle page on se trouve
 if(isset($_GET['page']) && !empty($_GET['page'])){
@@ -14,24 +19,41 @@ if(isset($_GET['page']) && !empty($_GET['page'])){
     $current_page_nb = 1;
 }
     include "includes/function_all_recipes.php"; 
-    $user_id = $_SESSION['id'];
-    $return = get_all_recipes($current_page_nb); 
+    
+//filter
+    if(isset($_GET['filter'])){
+        $filter = $_GET['filter'];
+    }else{
+        $filter_tab['0']['empty'] = 'none';
+        $filter = $filter_tab['0'];
+    }
 
-    $pages = $return['pages_nb'];
-    $first_recipe = $return['first'];
-    $recipes = $return['recipes'];
+//sort
+    if(isset($_GET['sort'])){
+        $sort = $_GET['sort'];
+    }else{
+        $sort_tab['0']['desc'] = 'desc';
+        $sort =  $sort_tab['0'];
+    }
+
+
+    $return = get_all_recipes($current_page_nb, $filter, $sort);
+
+    if(!isset($return['error'])){
+        $pages = $return['pages_nb'];
+        $first_recipe = $return['first'];
+        $recipes = $return['recipes'];
+    }
 
 ?>
 
 <!DOCTYPE html>
 <html lang="en" > 
 <head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" href="http://localhost/TD_RECIPES/includes/img/favicon.png" type="image/png">
-  <Link href="http://localhost/TD_RECIPES/style.css" rel="stylesheet" type="text/css" />
-  <title>Mes recettes - Toutes les recettes</title>
+
+    <?php include "includes/include_meta_link.php"; ?>
+
+  <title> Mon carnet de recettes - Toutes les recettes de cuisines partagées </title>
 
 </head>
 
@@ -41,18 +63,66 @@ if(isset($_GET['page']) && !empty($_GET['page'])){
         <?php include "includes/navbar.php" ?>
     </header>
 
-    <main>
-        <section class="bloc bg_card">
-            <h2 class="bloc__title bloc__title--bg">Toutes les recettes</h2>
+    <main class="bloc bg_card <?php if(isset($return['error'])){echo 'smaller';} ?>" >
+        <section class="bloc">
+            <h1 class="bloc__title bloc__title--bg">Toutes les recettes</h1>
+            <div class="dropdown">
+                <button class="dropbtn" id="dropBtn">Filtrer</button>
+                <form id="filterTable" class="dropdown__filter" name="filter" method="GET" action="#">
+                    <?php if(isset($filter)){
+                        foreach($filter as $filterName){ $n = 0;?>
+
+                    <button type="submit" class="btn filter_button <?php $filterName == 'Entrées' ? $state[$n] = 'disabled' : $state[$n] = ''; echo $state[$n]; ?>" name="filter[entree]" value="Entrées" <?php $n++;?>>Entrées</button>
+                    <button type="submit" class="btn filter_button <?php $filterName == 'Plats' ? $state[$n] = 'disabled' : $state[$n] = ''; echo $state[$n];?>" name="filter[plat]" value="Plats" <?php $n++;?>>Plats</button>
+                    <button type="submit" class="btn filter_button <?php $filterName == 'Desserts' ? $state[$n] = 'disabled' : $state[$n] = ''; echo $state[$n];?>" name="filter[dessert]" value="Desserts" <?php $n++;?>>Desserts</button>
+                    <button type="submit" class="btn filter_button <?php $filterName == 'Amuses bouches' ? $state[$n] = 'disabled' : $state[$n] = ''; echo $state[$n];?>" name="filter[amuse]"value="Amuses bouches" <?php $n++;?>>Amuses bouches</button>
+                    <button type="submit" class="btn filter_button <?php $filterName == 'Accompagnements' ? $state[$n] = 'disabled' : $state[$n] = ''; echo $state[$n]; ?>" name="filter[accompagnement]"value="Accompagnements" <?php$n++;?>>Accompagnements</button>
+                    <button type="submit" class="btn filter_button <?php $filterName == 'Sauces' ? $state[$n] = 'disabled' : $state[$n] = ''; echo $state[$n]; ?>" name="filter[sauce]"value="Sauces" <?php $n++;?>>Sauces</button>
+                    <button type="submit" class="btn filter_button <?php $filterName == 'Boissons' ? $state[$n] = 'disabled' : $state[$n] = ''; echo $state[$n]; ?>" name="filter[boisson]"value="Boissons" <?php$n++;?>>Boissons</button>
+                    
+                        <?php if($filterName !== 'none'){
+                            echo '<button type="submit" class="btn filter_button filter_button--supp" name="filter[\'none\']" value="none"> Supprimer le filtre </button>';
+                            }
+                        }
+                    }
+                    ?>
+                </form>
+                <button id="sortBtn" class="dropbtn" id="dropBtn">Trier</button>
+                <form id="sortTable" class="dropdown__sort" name="sort" method="GET" action="#">
+                    <p class="row">Trier par : </p>
+                    <?php foreach($sort as $sortValue){ ?>
+                        <button type="submit" class="btn sort_button <?php echo $sortValue == "desc" ? 'disabled' : ''; ?>" name="sort[desc]" value="desc" <?php echo $sortValue == "desc" ? 'disabled' : ''; ?>> Recettes les plus récentes </button>
+                    <button type="submit" class="btn sort_button <?php echo $sortValue == "asc" ? 'disabled' : ''; ?>" name="sort[asc]" value="asc" <?php echo $sortValue == "asc" ? 'disabled' : ''; ?>> Recettes les plus anciennes </button>
+                   <?php }?>
+                    </form>
+            </div>
             <div class="bloc__body--card">
-                <?php
-                $i = 0;
-                foreach($recipes as $recipe => $array){?>
+
+                <?php 
+                if(isset($return['error'])){  
+                    foreach($return['error'] as $errors => $error){ 
+                    echo 
+                    '<div class="return_error error--grid text-center">
+                        <h4>'.$error.'</h4>
+                    </div>';
+                    }
+                }
+                if(isset($filter)){
+                    foreach($filter as $filterName){
+                        if($filterName !== 'none'){
+                        echo '<h4 class="filter_name"> Catégorie : '.$filterName.'</h4>';
+                        }
+                    }   
+                }
+                
+                if(!isset($return['error'])){ 
+                    $i = 0;
+                    foreach($recipes as $recipe => $array){?>
 
                     <div class="card">
                         <div class="card__header">
                             <?php
-                                echo '<img src="http://localhost/TD_RECIPES/Pictures/'.$array['name'].'"  alt="image">';                  
+                                echo '<img src="'.BASE_URL.'/Pictures/'.$array['name'].'"  alt="image de la recette de cuisine">';                  
                             ?>
                         </div>
                         <div class="card__body b0">
@@ -67,17 +137,14 @@ if(isset($_GET['page']) && !empty($_GET['page'])){
                             </button>
     
                             <div class="bloc__collapse">
-                            <div class="card__button"> 
-                                <form class="noPad" action="http://localhost/TD_RECIPES/recipe_extension.php" method="get" enctype="multipart/form-data">
-                                    <button type="submit" class="btn btn--extend" name="extend_btn" <?php echo 'value="'.$array['recipe_id'].'"'; ?> > <i class="bi bi-box-arrow-up-right"></i> </button>
-                                </form>
-                            </div>
                                 <?php    
+                                $last = substr($array['last_name'],0,1);
                                     echo 
                                     '<ul class="list-group">
+                                        <li class="list-group-item "> <i class="bi bi-vector-pen"></i> Auteur : '.$array['first_name'].'  '.$last.'.</li>
                                         <li class="list-group-item "> <i class="bi bi-tag"></i> Catégorie : '.$array['type'].'</li>
                                         <li class="list-group-item"><i class="bi bi-people-fill"></i> Pour '.$array['guest_number'].' personnes </li>
-                                        <li class="list-group-item"> <i class="bi bi-hourglass-bottom"></i> Temps de préparation : '.$array['setup_time'].'</li>
+                                        <li class="list-group-item"> <i class="bi bi-hourglass-bottom"></i> Temps de préparation : '.$array['setup_time'].' minutes </li>
                                         <li class="list-group-item">';
                                         if($array['level']=='faible'){
                                             echo 
@@ -126,25 +193,32 @@ if(isset($_GET['page']) && !empty($_GET['page'])){
                                         }
                                         '</li>';
                                      ?>
-                                     </ul>
-                                
+                                    </ul>
+                                    <div class="bloc__row">
+                                        <div class="card__button"> 
+                                            <form class="noPad" action="<?php echo BASE_URL.'/recipe_extension.php'?>" method="get" enctype="multipart/form-data">
+                                                <button type="submit" class="btn btn--extend" name="extend_btn" <?php echo 'value="'.$array['recipe_id'].'"'; ?> > <i class="bi bi-box-arrow-up-right"></i> Voir la fiche </button>
+                                            </form>
+                                        </div>
+                                        <?php
+                                        if(isset($_SESSION['id']) || !empty($_SESSION['id']) && $_SESSION['id'] == $array['author_id']){?>
+                                        <div class="card__button"> 
+                                            <form class="noPad" action="<?php echo BASE_URL.'/edit_recipes.php'?>" method="get" enctype="multipart/form-data" >
+                                                <button class="btn btn--edit " type="submit" name="edit_btn" <?php echo 'value="'.$array['recipe_id'].'"'; ?>><i class="bi bi-pencil-fill"></i> Editer</button>
+                                            </form>
+                                        </div>
+                                        <?php } ?>
+                                    </div>
                                 <?php
-
-                                if($user_id == $array['author_id']){?>
-                                <div class="card__button"> 
-                                    <form class="noPad" action="http://localhost/TD_RECIPES/edit_recipes.php" method="get" enctype="multipart/form-data" >
-                                        <button class="btn btn--edit " type="submit" name="edit_btn" <?php echo 'value="'.$array['recipe_id'].'"'; ?>><i class="bi bi-pencil-fill"></i> Editer</button>
-                                    </form>
-                                </div>
-                                <?php }
                                 $i++; 
                                 ?>
                             </div>
                         </div>
                     </div>
                 <?php } ?>
+                <?php } ?>
             </div>
-
+            <?php if(!isset($return['error'])&& ($pages > 1)){ ?>
             <ul class="pagination">
                 <!-- Lien vers la page précédente (désactivé si on se trouve sur la 1ère page) -->
                 <li class="page-item <?= ($current_page_nb <= 1) ? "disabled" : "" ?>">
@@ -175,11 +249,13 @@ if(isset($_GET['page']) && !empty($_GET['page'])){
                     </a>
                 </li>
             </ul>
+            <?php }?>
 
         </section>
     </main>
-<?php include "includes/footer.php" ?>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-<script src="http://localhost/TD_RECIPES/js/index.js"></script>
+<?php 
+include  "includes/footer.php"; 
+include "includes/include_script.php";
+?> 
 </body>
  </html>

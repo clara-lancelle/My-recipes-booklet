@@ -1,12 +1,35 @@
+@mixin mediumScreen {
+    @media screen and(max-width: 1600px) {
+        @content;
+    }
+}
 
 @mixin smallScreen {
     @media screen and(max-width: 1290px) {
-        @content
+        @content;
+    }
+}
+
+@mixin s_smallScreen {
+    @media screen and(max-width: 1090px) {
+        @content;
     }
 }
 
 @mixin x_smallScreen {
     @media screen and(max-width: 790px) {
+        @content;
+    }
+}
+
+@mixin xx_smallScreen {
+    @media screen and(max-width: 380px) {
+        @content;
+    }
+}
+
+@mixin xxx_smallScreen {
+    @media screen and(max-width: 270px) {
         @content;
     }
 }
