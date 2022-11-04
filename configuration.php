@@ -1,3 +1,3 @@
 <?php
 
-const BASE_URL = 'http://localhost/TD_RECIPES';
+const BASE_URL = 'http://localhost/My_recipes_booklet';
